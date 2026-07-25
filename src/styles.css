@@ -123,6 +123,8 @@ em { font-family: 'Newsreader', serif; font-weight: 500; }
 .project-copy ul { list-style: none; padding: 0; margin: 32px 0 45px; display: flex; flex-wrap: wrap; gap: 8px; }
 .project-copy li { border: 1px solid #4c524c; border-radius: 100px; padding: 8px 12px; font-family: 'DM Mono'; font-size: 9px; text-transform: uppercase; }
 .project-link { display: inline-flex; align-items: center; gap: 25px; border-bottom: 1px solid; padding-bottom: 6px; font-size: 12px; }
+.project-links { display: flex; flex-wrap: wrap; align-items: center; gap: 26px; }
+.project-link.secondary { color: #aeb4ac; }
 
 .contact { padding: clamp(100px, 11vw, 170px) clamp(22px, 6.5vw, 104px) 35px; background: var(--orange); }
 .contact > p { margin: 65px 0 20px; font-size: 14px; }
@@ -162,6 +164,7 @@ footer > span:last-child { text-align: right; }
   .capabilities h3 { margin-top: 55px; }
   .project-list { gap: 85px; }
   .project-image { aspect-ratio: 1.2; }
+  .project-links { gap: 20px; }
   footer { grid-template-columns: 1fr; gap: 22px; }
   footer > span:last-child { text-align: left; }
 }
