@@ -1,4 +1,11 @@
 import { useState } from 'react'
+import {
+  siCelery, siDocker, siDotnet, siFastapi, siFlutter, siGit, siGithubactions,
+  siJunit5, siJavascript, siMinio, siMongodb, siMysql, siOpenapiinitiative,
+  siOpenjdk, siPostgresql, siPytest, siPython, siQgis, siReact, siRedis, siSharp,
+  siSpringboot, siSpringsecurity, siSqlalchemy, siTestinglibrary, siTypescript,
+  siVite, siVitest,
+} from 'simple-icons'
 
 const projects = [
   {
@@ -9,7 +16,7 @@ const projects = [
     description: 'A private document workspace that turns PDFs into searchable, citable knowledge—without hiding the engineering behind a magic AI button.',
     highlights: ['OCR fallback', 'Multi-document RAG', 'Async processing', 'Owner-scoped storage'],
     stack: ['React', 'FastAPI', 'PostgreSQL', 'pgvector', 'Celery', 'Redis', 'MinIO'],
-    image: '/images/insightpdf-workspace.png',
+    image: '/images/insightpdf-landing.png',
     liveHref: 'https://insightpdf-client.onrender.com/',
     repoHref: 'https://github.com/ttnhan227/InsightPDF',
     accent: 'acid',
@@ -22,7 +29,7 @@ const projects = [
     description: 'An expense review system where AI proposes and explains, while authenticated backend workflows retain financial authority.',
     highlights: ['Tenant isolation', 'Editable AI extraction', 'Deterministic risk', 'Audited decisions'],
     stack: ['React', 'TypeScript', 'ASP.NET Core', 'EF Core', 'PostgreSQL', 'Docker'],
-    image: '/images/verispend-workspace.png',
+    image: '/images/verispend-landing.png',
     liveHref: 'https://aiaudit-expensetracker-web.onrender.com/',
     repoHref: 'https://github.com/ttnhan227/VeriSpend',
     accent: 'coral',
@@ -41,13 +48,18 @@ const projects = [
   },
 ]
 
-const skills = {
-  Languages: ['Python', 'C#', 'Java', 'TypeScript', 'JavaScript', 'SQL'],
-  Backend: ['FastAPI', 'SQLAlchemy', 'ASP.NET Core', 'EF Core', 'Spring Boot', 'Spring Security', 'REST APIs', 'Celery'],
-  Frontend: ['React', 'Vite', 'Flutter'],
-  Data: ['PostgreSQL', 'MySQL', 'MongoDB', 'pgvector', 'PostGIS', 'Redis', 'MinIO'],
-  Delivery: ['Docker', 'pytest', 'xUnit', 'JUnit', 'Vitest', 'Playwright', 'GitHub Actions', 'Git'],
-}
+const skills = [
+  ['Python', siPython], ['C#', siSharp], ['Java', siOpenjdk], ['TypeScript', siTypescript],
+  ['JavaScript', siJavascript], ['SQL', siPostgresql], ['FastAPI', siFastapi],
+  ['SQLAlchemy', siSqlalchemy], ['ASP.NET Core', siDotnet], ['EF Core', siDotnet],
+  ['Spring Boot', siSpringboot], ['Spring Security', siSpringsecurity],
+  ['REST APIs', siOpenapiinitiative], ['Celery', siCelery], ['React', siReact],
+  ['Vite', siVite], ['Flutter', siFlutter], ['PostgreSQL', siPostgresql],
+  ['MySQL', siMysql], ['MongoDB', siMongodb], ['pgvector', siPostgresql],
+  ['PostGIS', siQgis], ['Redis', siRedis], ['MinIO', siMinio], ['Docker', siDocker],
+  ['pytest', siPytest], ['xUnit', siDotnet], ['JUnit', siJunit5], ['Vitest', siVitest],
+  ['Playwright', siTestinglibrary], ['GitHub Actions', siGithubactions], ['Git', siGit],
+]
 
 const certifications = [
   {
@@ -55,12 +67,21 @@ const certifications = [
     title: 'Neural Networks and Deep Learning',
     issuer: 'DeepLearning.AI',
     note: 'Neural network foundations, deep architectures, and practical model development.',
+    href: 'https://www.coursera.org/account/accomplishments/verify/G8OM8ZF9XV0D',
   },
   {
     year: 'MAY 2025',
     title: 'Machine Learning and NLP Basics',
     issuer: 'Edureka',
     note: 'Core machine learning workflows and natural language processing fundamentals.',
+    href: 'https://www.coursera.org/account/accomplishments/verify/PF7VUJA76FOD',
+  },
+  {
+    year: 'FEB 12, 2025',
+    title: 'Using Databases with Python',
+    issuer: 'University of Michigan',
+    note: 'Using Python to connect with databases, model relational data, and work with SQLite.',
+    href: 'https://www.coursera.org/account/accomplishments/verify/QHQP82P01A45',
   },
 ]
 
@@ -68,10 +89,16 @@ function Arrow() {
   return <span aria-hidden="true">↗</span>
 }
 
+function SkillIcon({ icon }) {
+  return (
+    <svg viewBox="0 0 24 24" aria-hidden="true" style={{ color: `#${icon.hex}` }}>
+      <path fill="currentColor" d={icon.path} />
+    </svg>
+  )
+}
+
 function App() {
   const [menuOpen, setMenuOpen] = useState(false)
-  const [skillFilter, setSkillFilter] = useState('All')
-  const visibleSkills = skillFilter === 'All' ? Object.values(skills).flat() : skills[skillFilter]
 
   return (
     <div className="site">
@@ -117,26 +144,20 @@ function App() {
         <section className="about section" id="about">
           <div className="section-label"><span>01</span> BEHIND THE CODE</div>
           <div className="about-copy">
-            <p className="lead">I’m a Software Engineering graduate who likes the part of a product users don’t see.</p>
+            <p className="lead">I’m a software engineer who likes the part of a product users don’t see.</p>
             <p>That means thoughtful data boundaries, predictable business rules, background jobs that recover cleanly, and AI features that remain traceable. I enjoy translating those foundations into interfaces people can actually understand and use.</p>
           </div>
           <div className="about-facts">
-            <article><strong>3</strong><span>SUBSTANTIAL<br />PRODUCTS</span></article>
-            <article><strong>3.5</strong><span>GPA / 4.0</span></article>
-            <article><strong>2026</strong><span>SOFTWARE ENGINEERING<br />GRADUATE</span></article>
+            <article><strong>3</strong><span>BUILT<br />SYSTEMS</span></article>
+            <article><strong>2</strong><span>LIVE<br />DEMOS</span></article>
+            <article><strong>3</strong><span>BACKEND<br />ECOSYSTEMS</span></article>
           </div>
-          <aside className="education-card">
-            <span>EDUCATION / 2023—2026</span>
-            <h3>Advanced Diploma in Software Engineering</h3>
-            <p>FPT Academy (Aptech)<br />Ho Chi Minh City, Vietnam</p>
-            <small>TechWiz Competition Participant · 2025</small>
-          </aside>
         </section>
 
         <section className="projects section" id="projects">
           <div className="section-label light"><span>02</span> PROJECTS / SELECTED BUILDS</div>
           <div className="section-heading">
-            <h2>THINGS I’VE<br /><em>SHIPPED.</em></h2>
+            <h2>SYSTEMS I’VE<br /><em>BUILT.</em></h2>
             <p>Three systems, three domains, one consistent focus: dependable software with clear reasoning behind it.</p>
           </div>
           <div className="project-list">
@@ -148,7 +169,15 @@ function App() {
                   <span>{project.type}</span>
                 </div>
                 <div className="project-visual">
-                  <img src={project.image} alt={`${project.title} product interface`} />
+                  <div className="browser-frame">
+                    <div className="browser-bar" aria-hidden="true">
+                      <div><i /><i /><i /></div>
+                      <span>{project.liveHref ? new URL(project.liveHref).hostname : `github.com/ttnhan227/${project.title.toLowerCase()}`}</span>
+                    </div>
+                    <div className="browser-viewport">
+                      <img src={project.image} alt={`${project.title} product interface`} />
+                    </div>
+                  </div>
                   <div className="project-actions">
                     {project.liveHref && <a href={project.liveHref} target="_blank" rel="noreferrer">LIVE <Arrow /></a>}
                     <a href={project.repoHref} target="_blank" rel="noreferrer">CODE <Arrow /></a>
@@ -171,13 +200,13 @@ function App() {
             <h2>TOOLS I USE<br /><em>TO BUILD.</em></h2>
             <p>A practical toolkit chosen around the problem—not around collecting logos.</p>
           </div>
-          <div className="skill-filters" role="group" aria-label="Filter technical skills">
-            {['All', ...Object.keys(skills)].map((filter) => (
-              <button className={skillFilter === filter ? 'active' : ''} type="button" key={filter} onClick={() => setSkillFilter(filter)}>{filter}</button>
-            ))}
-          </div>
           <div className="skill-cloud">
-            {visibleSkills.map((skill, index) => <span key={skill} style={{ '--delay': `${index * 18}ms` }}>{skill}</span>)}
+            {skills.map(([skill, icon], index) => (
+              <span key={skill} style={{ '--delay': `${index * 18}ms` }}>
+                <SkillIcon icon={icon} />
+                {skill}
+              </span>
+            ))}
           </div>
         </section>
 
@@ -185,11 +214,11 @@ function App() {
           <div className="section-label"><span>04</span> LEARNING MILESTONES</div>
           <div className="credential-list">
             {certifications.map((item, index) => (
-              <article key={item.title}>
+              <a href={item.href} target="_blank" rel="noreferrer" key={item.title}>
                 <span className="credential-number">0{index + 1}</span>
                 <div><small>{item.year} / {item.issuer}</small><h3>{item.title}</h3></div>
-                <p>{item.note}</p>
-              </article>
+                <p>{item.note}<span>View credential <Arrow /></span></p>
+              </a>
             ))}
           </div>
         </section>
@@ -202,6 +231,9 @@ function App() {
             </a>
             <a href="https://linkedin.com/in/trantrongnhan" target="_blank" rel="noreferrer">
               <small>WORK / NETWORK</small><strong>LinkedIn</strong><span>trantrongnhan <Arrow /></span>
+            </a>
+            <a href="https://leetcode.com/u/ttnhan227/" target="_blank" rel="noreferrer">
+              <small>PROBLEM SOLVING</small><strong>LeetCode</strong><span>@ttnhan227 <Arrow /></span>
             </a>
             <a href="/Tran_Trong_Nhan_CV.pdf" target="_blank">
               <small>EXPERIENCE / SKILLS</small><strong>Résumé</strong><span>Open PDF <Arrow /></span>
