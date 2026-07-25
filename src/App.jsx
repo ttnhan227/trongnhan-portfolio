@@ -3,153 +3,224 @@ import { useState } from 'react'
 const projects = [
   {
     number: '01',
+    date: 'JUL 2026',
     title: 'InsightPDF',
-    eyebrow: 'AI document platform · Personal project',
-    description: 'A secure document workspace for OCR, multi-document RAG chat, page citations, structured analysis, comparison, and background PDF transformations.',
-    stack: ['React', 'FastAPI', 'pgvector', 'Celery', 'Redis', 'MinIO'],
+    type: 'AI document platform',
+    description: 'A private document workspace that turns PDFs into searchable, citable knowledge—without hiding the engineering behind a magic AI button.',
+    highlights: ['OCR fallback', 'Multi-document RAG', 'Async processing', 'Owner-scoped storage'],
+    stack: ['React', 'FastAPI', 'PostgreSQL', 'pgvector', 'Celery', 'Redis', 'MinIO'],
     image: '/images/insightpdf-workspace.png',
     liveHref: 'https://insightpdf-client.onrender.com/',
     repoHref: 'https://github.com/ttnhan227/InsightPDF',
+    accent: 'acid',
   },
   {
     number: '02',
+    date: 'APR—JUN 2026',
     title: 'VeriSpend',
-    eyebrow: 'Fintech · Personal project',
-    description: 'A multi-tenant expense review system with editable AI receipt extraction, deterministic risk signals, role-protected approvals, and actor-attributed audit history.',
-    stack: ['React', 'TypeScript', 'ASP.NET Core', 'PostgreSQL', 'Docker'],
+    type: 'AI-assisted fintech',
+    description: 'An expense review system where AI proposes and explains, while authenticated backend workflows retain financial authority.',
+    highlights: ['Tenant isolation', 'Editable AI extraction', 'Deterministic risk', 'Audited decisions'],
+    stack: ['React', 'TypeScript', 'ASP.NET Core', 'EF Core', 'PostgreSQL', 'Docker'],
     image: '/images/verispend-workspace.png',
     liveHref: 'https://aiaudit-expensetracker-web.onrender.com/',
     repoHref: 'https://github.com/ttnhan227/VeriSpend',
+    accent: 'coral',
   },
   {
     number: '03',
+    date: 'OCT 2025—JAN 2026',
     title: 'LogiFlow',
-    eyebrow: 'Logistics · Academic team project',
-    description: 'A freight operations platform spanning customer orders, dispatch planning, live driver tracking, delivery confirmation, payments, reporting, and audit history.',
-    stack: ['React', 'Spring Boot', 'Flutter', 'PostGIS', 'WebSockets'],
+    type: 'Academic team project',
+    description: 'A freight operations platform connecting orders, dispatchers, drivers, live location, delivery, payments, and reporting.',
+    highlights: ['Role-based workflows', 'Live GPS tracking', 'WebSocket chat', 'Flutter driver app'],
+    stack: ['React', 'Spring Boot', 'Flutter', 'PostgreSQL', 'PostGIS', 'STOMP'],
     image: '/images/logiflow-workspace.png',
     repoHref: 'https://github.com/ttnhan227/logiflow',
+    accent: 'blue',
   },
 ]
 
-const capabilities = [
-  ['01', 'Backend systems', 'Secure REST APIs, authentication, authorization, tenant isolation, business rules, and data models built for real workflows.'],
-  ['02', 'Async & AI workflows', 'Background processing, OCR, retrieval-augmented generation, structured AI outputs, and safe human review boundaries.'],
-  ['03', 'Production foundations', 'Automated tests, Docker, CI pipelines, private object storage, and documented engineering trade-offs.'],
+const skills = {
+  Languages: ['Python', 'C#', 'Java', 'TypeScript', 'JavaScript', 'SQL'],
+  Backend: ['FastAPI', 'SQLAlchemy', 'ASP.NET Core', 'EF Core', 'Spring Boot', 'Spring Security', 'REST APIs', 'Celery'],
+  Frontend: ['React', 'Vite', 'Flutter'],
+  Data: ['PostgreSQL', 'MySQL', 'MongoDB', 'pgvector', 'PostGIS', 'Redis', 'MinIO'],
+  Delivery: ['Docker', 'pytest', 'xUnit', 'JUnit', 'Vitest', 'Playwright', 'GitHub Actions', 'Git'],
+}
+
+const certifications = [
+  {
+    year: '2025',
+    title: 'Neural Networks and Deep Learning',
+    issuer: 'DeepLearning.AI',
+    note: 'Neural network foundations, deep architectures, and practical model development.',
+  },
+  {
+    year: 'MAY 2025',
+    title: 'Machine Learning and NLP Basics',
+    issuer: 'Edureka',
+    note: 'Core machine learning workflows and natural language processing fundamentals.',
+  },
 ]
+
+function Arrow() {
+  return <span aria-hidden="true">↗</span>
+}
 
 function App() {
   const [menuOpen, setMenuOpen] = useState(false)
+  const [skillFilter, setSkillFilter] = useState('All')
+  const visibleSkills = skillFilter === 'All' ? Object.values(skills).flat() : skills[skillFilter]
 
   return (
     <div className="site">
       <header className="nav">
-        <a className="brand" href="#top" aria-label="Tran Trong Nhan, home">TN<span>.</span></a>
-        <button className="menu-toggle" type="button" onClick={() => setMenuOpen(!menuOpen)} aria-expanded={menuOpen} aria-label="Toggle navigation">
-          {menuOpen ? 'Close' : 'Menu'}
+        <a className="brand" href="#top" aria-label="Tran Trong Nhan, home">
+          TN<span>/</span><small>SOFTWARE ENGINEER</small>
+        </a>
+        <button className="menu-toggle" type="button" onClick={() => setMenuOpen(!menuOpen)} aria-expanded={menuOpen}>
+          {menuOpen ? 'CLOSE' : 'MENU'}
         </button>
         <nav className={menuOpen ? 'nav-links open' : 'nav-links'} aria-label="Main navigation">
-          <a href="#about" onClick={() => setMenuOpen(false)}>About</a>
-          <a href="#portfolio" onClick={() => setMenuOpen(false)}>Projects</a>
-          <a href="/Tran_Trong_Nhan_CV.pdf" target="_blank" onClick={() => setMenuOpen(false)}>CV</a>
-          <a href="#contact" onClick={() => setMenuOpen(false)}>Contact</a>
+          {['about', 'projects', 'skills', 'contact'].map((item) => (
+            <a key={item} href={`#${item}`} onClick={() => setMenuOpen(false)}>{item}</a>
+          ))}
         </nav>
-        <a className="nav-cta" href="mailto:ttnhan227@gmail.com">Let’s talk <span>↗</span></a>
+        <a className="nav-status" href="mailto:ttnhan227@gmail.com"><i /> OPEN TO WORK</a>
       </header>
 
       <main>
         <section className="hero" id="top">
-          <div className="hero-copy">
-            <div className="kicker"><span /> Ho Chi Minh City, Vietnam</div>
-            <h1>Software engineer<br />building dependable<br /><em>backend systems.</em></h1>
-            <p>I’m <strong>Tran Trong Nhan</strong>, a Software Engineering graduate who builds full-stack products with a backend focus—from secure APIs and asynchronous processing to AI document workflows.</p>
+          <div className="hero-grid" aria-hidden="true" />
+          <div className="hero-badge">BASED IN<br />HO CHI MINH CITY</div>
+          <p className="hero-intro">Hello, I’m Tran Trong Nhan—</p>
+          <h1>
+            <span>BACKEND-MINDED</span>
+            <span className="outline">FULL-STACK</span>
+            <span>ENGINEER<span className="hero-dot">.</span></span>
+          </h1>
+          <div className="hero-bottom">
+            <p>I build secure APIs, asynchronous systems, and AI-assisted products that make complicated work feel clear.</p>
             <div className="hero-actions">
-              <a className="button primary" href="#portfolio">Explore my work <span>↓</span></a>
-              <a className="text-link" href="/Tran_Trong_Nhan_CV.pdf" target="_blank">Download CV ↗</a>
+              <a className="button dark" href="#projects">SEE THE WORK <span>↓</span></a>
+              <a className="button line" href="/Tran_Trong_Nhan_CV.pdf" target="_blank">VIEW CV <Arrow /></a>
             </div>
           </div>
-          <div className="hero-visual" aria-label="Technology overview">
-            <div className="orbit orbit-one" />
-            <div className="orbit orbit-two" />
-            <div className="monogram">TN</div>
-            <div className="floating-tag tag-react">React + TypeScript</div>
-            <div className="floating-tag tag-api">FastAPI + .NET</div>
-            <div className="floating-tag tag-data">PostgreSQL</div>
-            <div className="code-card">
-              <div className="code-dots"><i /><i /><i /></div>
-              <code><span>const</span> engineer = {'{'}<br />&nbsp;&nbsp;focus: <b>"backend"</b>,<br />&nbsp;&nbsp;ships: <b>"with care"</b><br />{'}'}</code>
-            </div>
-          </div>
+          <div className="scroll-note">SCROLL TO EXPLORE <span>↓</span></div>
         </section>
 
-        <section className="ticker" aria-label="Core technologies">
-          <div>Python <span>✦</span> C# <span>✦</span> Java <span>✦</span> TypeScript <span>✦</span> FastAPI <span>✦</span> ASP.NET Core <span>✦</span> Spring Boot <span>✦</span> PostgreSQL <span>✦</span> Docker <span>✦</span></div>
+        <section className="marquee" aria-label="Core specialties">
+          <div>SECURE APIS ✦ ASYNC PROCESSING ✦ AI WORKFLOWS ✦ FULL-STACK DELIVERY ✦ SECURE APIS ✦ ASYNC PROCESSING ✦ AI WORKFLOWS ✦ FULL-STACK DELIVERY ✦</div>
         </section>
 
-        <section className="about" id="about">
-          <div className="section-index">01 / About</div>
-          <div className="about-main">
-            <h2>I care about what happens <em>behind</em> the interface.</h2>
-            <p>My work centers on secure data access, clear business rules, resilient background jobs, and AI features that stay traceable and accountable. I build the interface too—but the system beneath it is where I do my best thinking.</p>
+        <section className="about section" id="about">
+          <div className="section-label"><span>01</span> BEHIND THE CODE</div>
+          <div className="about-copy">
+            <p className="lead">I’m a Software Engineering graduate who likes the part of a product users don’t see.</p>
+            <p>That means thoughtful data boundaries, predictable business rules, background jobs that recover cleanly, and AI features that remain traceable. I enjoy translating those foundations into interfaces people can actually understand and use.</p>
           </div>
-          <aside className="education">
-            <span>Education</span>
-            <strong>Advanced Diploma in<br />Software Engineering</strong>
-            <p>FPT Academy (Aptech)<br />Nov 2023—Jan 2026 · GPA 3.5/4.0</p>
+          <div className="about-facts">
+            <article><strong>3</strong><span>SUBSTANTIAL<br />PRODUCTS</span></article>
+            <article><strong>3.5</strong><span>GPA / 4.0</span></article>
+            <article><strong>2026</strong><span>SOFTWARE ENGINEERING<br />GRADUATE</span></article>
+          </div>
+          <aside className="education-card">
+            <span>EDUCATION / 2023—2026</span>
+            <h3>Advanced Diploma in Software Engineering</h3>
+            <p>FPT Academy (Aptech)<br />Ho Chi Minh City, Vietnam</p>
+            <small>TechWiz Competition Participant · 2025</small>
           </aside>
         </section>
 
-        <section className="capabilities" id="work">
-          {capabilities.map(([number, title, description]) => (
-            <article key={title}>
-              <span>{number}</span>
-              <h3>{title}</h3>
-              <p>{description}</p>
-            </article>
-          ))}
-        </section>
-
-        <section className="projects" id="portfolio">
-          <div className="projects-heading">
-            <div className="section-index">02 / Selected projects</div>
-            <h2>Built to solve<br /><em>real problems.</em></h2>
-            <p>Three substantial products showing how I approach architecture, security, asynchronous work, AI guardrails, and delivery across different domains.</p>
+        <section className="projects section" id="projects">
+          <div className="section-label light"><span>02</span> PROJECTS / SELECTED BUILDS</div>
+          <div className="section-heading">
+            <h2>THINGS I’VE<br /><em>SHIPPED.</em></h2>
+            <p>Three systems, three domains, one consistent focus: dependable software with clear reasoning behind it.</p>
           </div>
-
           <div className="project-list">
             {projects.map((project) => (
-              <article className="project" key={project.title}>
-                <a className="project-image" href={project.liveHref || project.repoHref} target="_blank" rel="noreferrer">
-                  <img src={project.image} alt={`${project.title} application preview`} />
-                  <span>{project.liveHref ? 'Live demo ↗' : 'Repository ↗'}</span>
-                </a>
+              <article className={`project ${project.accent}`} key={project.title}>
+                <div className="project-meta">
+                  <span>{project.number}</span>
+                  <span>{project.date}</span>
+                  <span>{project.type}</span>
+                </div>
+                <div className="project-visual">
+                  <img src={project.image} alt={`${project.title} product interface`} />
+                  <div className="project-actions">
+                    {project.liveHref && <a href={project.liveHref} target="_blank" rel="noreferrer">LIVE <Arrow /></a>}
+                    <a href={project.repoHref} target="_blank" rel="noreferrer">CODE <Arrow /></a>
+                  </div>
+                </div>
                 <div className="project-copy">
-                  <div className="project-topline"><span>{project.number}</span><span>{project.eyebrow}</span></div>
                   <h3>{project.title}</h3>
                   <p>{project.description}</p>
-                  <ul>{project.stack.map((item) => <li key={item}>{item}</li>)}</ul>
-                  <div className="project-links">
-                    {project.liveHref && <a className="project-link" href={project.liveHref} target="_blank" rel="noreferrer">View live product <span>↗</span></a>}
-                    <a className="project-link secondary" href={project.repoHref} target="_blank" rel="noreferrer">GitHub <span>↗</span></a>
-                  </div>
+                  <ul className="highlights">{project.highlights.map((item) => <li key={item}>{item}</li>)}</ul>
+                  <ul className="stack">{project.stack.map((item) => <li key={item}>{item}</li>)}</ul>
                 </div>
               </article>
             ))}
           </div>
         </section>
 
+        <section className="skills section" id="skills">
+          <div className="section-label"><span>03</span> CORE EXPERTISE</div>
+          <div className="section-heading dark-heading">
+            <h2>TOOLS I USE<br /><em>TO BUILD.</em></h2>
+            <p>A practical toolkit chosen around the problem—not around collecting logos.</p>
+          </div>
+          <div className="skill-filters" role="group" aria-label="Filter technical skills">
+            {['All', ...Object.keys(skills)].map((filter) => (
+              <button className={skillFilter === filter ? 'active' : ''} type="button" key={filter} onClick={() => setSkillFilter(filter)}>{filter}</button>
+            ))}
+          </div>
+          <div className="skill-cloud">
+            {visibleSkills.map((skill, index) => <span key={skill} style={{ '--delay': `${index * 18}ms` }}>{skill}</span>)}
+          </div>
+        </section>
+
+        <section className="credentials section">
+          <div className="section-label"><span>04</span> LEARNING MILESTONES</div>
+          <div className="credential-list">
+            {certifications.map((item, index) => (
+              <article key={item.title}>
+                <span className="credential-number">0{index + 1}</span>
+                <div><small>{item.year} / {item.issuer}</small><h3>{item.title}</h3></div>
+                <p>{item.note}</p>
+              </article>
+            ))}
+          </div>
+        </section>
+
+        <section className="presence section">
+          <div className="section-label"><span>05</span> WEB PRESENCE</div>
+          <div className="presence-grid">
+            <a href="https://github.com/ttnhan227" target="_blank" rel="noreferrer">
+              <small>BUILD LOG / SOURCE</small><strong>GitHub</strong><span>@ttnhan227 <Arrow /></span>
+            </a>
+            <a href="https://linkedin.com/in/trantrongnhan" target="_blank" rel="noreferrer">
+              <small>WORK / NETWORK</small><strong>LinkedIn</strong><span>trantrongnhan <Arrow /></span>
+            </a>
+            <a href="/Tran_Trong_Nhan_CV.pdf" target="_blank">
+              <small>EXPERIENCE / SKILLS</small><strong>Résumé</strong><span>Open PDF <Arrow /></span>
+            </a>
+          </div>
+        </section>
+
         <section className="contact" id="contact">
-          <div className="section-index">03 / Contact</div>
-          <p>Have an opportunity or a problem worth solving?</p>
-          <h2>Let’s build something<br /><em>useful together.</em></h2>
-          <a className="email-link" href="mailto:ttnhan227@gmail.com">ttnhan227@gmail.com <span>↗</span></a>
+          <div className="contact-top">
+            <span>06 / GET IN TOUCH</span>
+            <span>AVAILABLE FOR SOFTWARE ENGINEERING OPPORTUNITIES</span>
+          </div>
+          <p>Have a useful problem?</p>
+          <h2>LET’S BUILD<br /><em>THE SYSTEM.</em></h2>
+          <a className="contact-email" href="mailto:ttnhan227@gmail.com">ttnhan227@gmail.com <Arrow /></a>
           <footer>
-            <span>© {new Date().getFullYear()} Tran Trong Nhan</span>
-            <div>
-              <a href="https://github.com/ttnhan227" target="_blank" rel="noreferrer">GitHub ↗</a>
-              <a href="https://linkedin.com/in/trantrongnhan" target="_blank" rel="noreferrer">LinkedIn ↗</a>
-            </div>
-            <span>Based in Ho Chi Minh City</span>
+            <span>© {new Date().getFullYear()} TRAN TRONG NHAN</span>
+            <span>DESIGNED & BUILT WITH CARE</span>
+            <a href="#top">BACK TO TOP ↑</a>
           </footer>
         </section>
       </main>
