@@ -42,7 +42,7 @@ const projects = [
     description: 'A freight operations platform connecting orders, dispatchers, drivers, live location, delivery, payments, and reporting.',
     highlights: ['Role-based workflows', 'Live GPS tracking', 'WebSocket chat', 'Flutter driver app'],
     stack: ['React', 'Spring Boot', 'Flutter', 'PostgreSQL', 'PostGIS', 'STOMP'],
-    image: '/images/logiflow-workspace.png',
+    image: '/images/logiflow-landing.png',
     repoHref: 'https://github.com/ttnhan227/logiflow',
     accent: 'blue',
   },
