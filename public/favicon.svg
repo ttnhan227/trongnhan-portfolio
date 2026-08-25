@@ -1,0 +1,28 @@
+﻿<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" width="64" height="64">
+  <defs>
+    <linearGradient id="brandGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#ff9a7b" />
+      <stop offset="100%" stop-color="#ff7043" />
+    </linearGradient>
+    <linearGradient id="bgGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#181c19" />
+      <stop offset="100%" stop-color="#0c0e0d" />
+    </linearGradient>
+  </defs>
+
+  <!-- Background Squircle -->
+  <rect width="64" height="64" rx="16" fill="url(#bgGrad)" />
+  <rect width="62" height="62" x="1" y="1" rx="15" fill="none" stroke="#2a2f2c" stroke-width="1.5" />
+
+  <!-- Monogram Mark "TN" -->
+  <g transform="translate(11, 14)">
+    <!-- T Letter -->
+    <path d="M 0 4 Q 0 2 2 2 L 18 2 Q 20 2 20 4 L 20 6 Q 20 8 18 8 L 12 8 L 12 28 Q 12 30 10 30 L 8 30 Q 6 30 6 28 L 6 8 L 2 8 Q 0 8 0 6 Z" fill="url(#brandGrad)" />
+    
+    <!-- N Letter -->
+    <path d="M 23 28 L 23 4 Q 23 2 25 2 L 28 2 Q 29.5 2 30.5 3.2 L 37.5 17.5 L 37.5 4 Q 37.5 2 39.5 2 L 41 2 Q 43 2 43 4 L 43 28 Q 43 30 41 30 L 38 30 Q 36.5 30 35.5 28.8 L 28.5 14.5 L 28.5 28 Q 28.5 30 26.5 30 L 25 30 Q 23 30 23 28 Z" fill="#f5f4f0" />
+  </g>
+
+  <!-- Modern Accent Dot -->
+  <circle cx="51" cy="45" r="3.5" fill="url(#brandGrad)" />
+</svg>

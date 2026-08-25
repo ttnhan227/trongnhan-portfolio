@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import {
   siCelery, siDocker, siDotnet, siFastapi, siFlutter, siGit, siGithubactions,
   siJunit5, siJavascript, siMinio, siMongodb, siMysql, siOpenapiinitiative,
@@ -24,7 +24,41 @@ const projects = [
       { label: 'Isolation & CI Tests', detail: 'Workspace-scoped multi-tenancy enforced with automated codebase scan checks and 102 Pytest tests' },
     ],
     stack: ['FastAPI', 'Python', 'React', 'PostgreSQL', 'pgvector', 'Celery', 'Redis', 'Docker', 'Google Cloud Run'],
-    image: '/images/groundwork-landing.png',
+    showcaseGrid: [
+      {
+        id: 'groundwork-landing',
+        label: 'Platform Landing & Interactive Verification Simulator',
+        url: 'groundwork-client.onrender.com/',
+        image: '/images/groundwork/groundwork-landing.png',
+        tag: 'Platform: Landing & Simulator',
+        description: 'Commercial manuscript landing page with document dropzone and Interactive Verification Gate Simulator.',
+      },
+      {
+        id: 'groundwork-library',
+        label: 'Dossier Command Hub & Template Library',
+        url: 'groundwork-client.onrender.com/?app=1',
+        image: '/images/groundwork/groundwork-library.png',
+        tag: 'Command: Dossier Library',
+        description: 'Multi-workspace regulatory library organizing enterprise compliance dossiers, preconfigured templates, and audit readiness.',
+      },
+      {
+        id: 'groundwork-studio',
+        label: 'Verification Studio & Manuscript Canvas',
+        url: 'groundwork-client.onrender.com/?app=1&ws=ws_01',
+        image: '/images/groundwork/groundwork-studio.png',
+        tag: 'Studio: Manuscript & Citations',
+        description: 'Active proposal workspace with 4 indexed evidence sources, inline [1][2] citations, and margin marginalia with 1-click verified SLA fixes.',
+      },
+      {
+        id: 'groundwork-insights',
+        label: 'Research, Benchmarks & Regulatory Insights Hub',
+        url: 'groundwork-client.onrender.com/#insights',
+        image: '/images/groundwork/groundwork-insights.png',
+        tag: 'Research: Benchmarks & Whitepapers',
+        description: 'Technical whitepapers and empirical evaluations benchmarking 0.0% hallucinated citations against RAG baselines on SEC 10-K filings.',
+      },
+    ],
+    image: '/images/groundwork/groundwork-landing.png',
     liveHref: 'https://groundwork-client.onrender.com/',
     repoHref: 'https://github.com/ttnhan227/Groundwork',
   },
@@ -44,7 +78,41 @@ const projects = [
       { label: 'Benchmark CLI', detail: 'Standalone CLI tool (ReceiptEvaluator) to benchmark field accuracy against labeled datasets, backed by 14 xUnit tests' },
     ],
     stack: ['ASP.NET Core', 'C#', 'React', 'TypeScript', 'EF Core', 'PostgreSQL', 'Mistral AI', 'Docker'],
-    image: '/images/verispend-landing.png',
+    showcaseGrid: [
+      {
+        id: 'verispend-landing',
+        label: 'SaaS Platform Landing & Product Tour',
+        url: 'verispend-client.onrender.com/',
+        image: '/images/verispend/verispend-landing.png',
+        tag: 'Platform: Landing & Tour',
+        description: 'Commercial SaaS landing presence, feature walkthroughs, and tier-based enterprise pricing plans.',
+      },
+      {
+        id: 'verispend-review',
+        label: 'Multi-Tenant Expense Management & Review',
+        url: 'verispend-client.onrender.com/expenses',
+        image: '/images/verispend/verispend-review.png',
+        tag: 'App: Expense Review',
+        description: 'Tenant-scoped expense inbox with receipt previews, status workflows, and category breakdowns.',
+      },
+      {
+        id: 'verispend-vision',
+        label: 'Mistral Vision AI Extraction & Copilot Audit',
+        url: 'verispend-client.onrender.com/expenses/exp-803',
+        image: '/images/verispend/verispend-vision.png',
+        tag: 'AI: Vision & Copilot',
+        description: 'Multimodal vision extraction parsing receipt metadata, itemized line items, risk scores (78/100), and Copilot audit recommendations.',
+      },
+      {
+        id: 'verispend-guardrails',
+        label: 'Deterministic Spend Limits & Policy Lab Simulator',
+        url: 'verispend-client.onrender.com/policy-lab',
+        image: '/images/verispend/verispend-guardrails.png',
+        tag: 'Policy: Spend Guardrails',
+        description: 'Rule engine validating policy thresholds, automated simulation rates, and budget limit violation flags.',
+      },
+    ],
+    image: '/images/verispend/verispend-landing.png',
     liveHref: 'https://verispend-client.onrender.com/',
     repoHref: 'https://github.com/ttnhan227/VeriSpend',
   },
@@ -54,17 +122,69 @@ const projects = [
     date: 'OCT 2025 — JAN 2026',
     title: 'LogiFlow',
     category: 'Freight Management & Real-Time Telemetry Platform',
-    overview: 'An academic team platform coordinating orders, dispatching, and delivery workflows across 4 distinct user roles with real-time GPS tracking and PayPal checkout.',
-    problem: 'Coordinating multi-stop freight logistics across dispatchers, drivers, and customers leads to lost shipment visibility, delayed billing, and lack of fulfillment proof.',
-    solution: 'Developed a Spring Boot backend and React web client with real-time WebSocket GPS telemetry to Leaflet maps, Flutter driver workflow with POD signatures, and dynamic iText PDF invoicing.',
+    overview: 'An enterprise logistics platform coordinating multi-stop freight orders, linehaul manifests, and live fleet dispatching with interactive GIS routing and real-time STOMP/WebSocket telemetry.',
+    problem: 'Coordinating multi-stop regional freight across dispatchers, fleet drivers, and operations leads to blind spots in transit, delayed carrier re-assignment, and lack of fulfillment SLA oversight.',
+    solution: 'Developed a Spring Boot backend and React web client featuring an interactive Leaflet corridor dispatch map, multi-role operations oversight, WebSocket-based live driver tracking, automated trip manifest scheduling, and PayPal checkout with PDF invoicing.',
     architecture: [
-      { label: 'Role Workflows', detail: 'Coordinated order, dispatch, and delivery state machines across 4 distinct roles (Admin, Dispatcher, Driver, Customer)' },
-      { label: 'Live Telemetry', detail: 'Real-time GPS coordinate broadcasting over WebSockets from Flutter mobile to React Leaflet dispatch map' },
+      { label: 'Role Workflows', detail: 'Coordinated state machines across 4 distinct roles (Admin Executive, Operations Dispatcher, Fleet Driver, Commercial Customer)' },
+      { label: 'GIS & Telemetry', detail: 'Interactive Leaflet corridor polyline routing, waypoint staging, and real-time GPS coordinate broadcasting over STOMP/WebSockets' },
+      { label: 'Operations & SLAs', detail: 'Executive command dashboard with DIFOT reliability metrics, commercial fleet readiness tracking, and latency analytics' },
       { label: 'Billing & Invoicing', detail: 'Integrated PayPal sandbox checkout and dynamic PDF invoice generation via Thymeleaf templates and iText' },
-      { label: 'Mobile & CI/CD', detail: 'Flutter mobile companion with digital signature capture, containerized via Docker Compose with GitHub Actions CI' },
+      { label: 'Mobile & Container', detail: 'Flutter driver companion with digital signature capture, containerized multi-service architecture with Docker' },
     ],
-    stack: ['Spring Boot', 'Java', 'React', 'Flutter', 'PostgreSQL', 'WebSockets', 'Thymeleaf', 'iText', 'Docker'],
-    image: '/images/logiflow-landing.png',
+    stack: ['Spring Boot', 'Java', 'React', 'Leaflet', 'Flutter', 'PostgreSQL', 'WebSockets', 'Recharts', 'Thymeleaf', 'iText', 'Docker'],
+    showcaseGrid: [
+      {
+        id: 'home-hero',
+        label: 'Home: Pan-Vietnam Hub & Telemetry',
+        url: 'logiflow.vn/',
+        image: '/images/logiflow/logiflow-home-hero.png',
+        tag: 'Public: Landing & Radar',
+        description: 'Customer portal with live active linehaul radar, GPS coordinate telemetry, and instant shipment tracking.',
+      },
+      {
+        id: 'home-news',
+        label: 'Supply Chain News & Market Insights',
+        url: 'logiflow.vn/insights',
+        image: '/images/logiflow/logiflow-news.png',
+        tag: 'Public: Market Insights',
+        description: 'Global freight market intelligence, container spot rate benchmarks, and industry news coverage.',
+      },
+      {
+        id: 'home-track',
+        label: 'Public Shipment Tracking & Status Timeline',
+        url: 'logiflow.vn/track',
+        image: '/images/logiflow/logiflow-track.png',
+        tag: 'Customer: Order Tracking',
+        description: 'Public shipper portal for real-time airway bill tracking, waypoint milestones, and electronic proof of delivery.',
+      },
+      {
+        id: 'ops-dashboard',
+        label: 'Operations: Enterprise Oversight',
+        url: 'app.logiflow.vn/admin/dashboard',
+        image: '/images/logiflow/logiflow-dashboard.png',
+        tag: 'Operations: Analytics Dashboard',
+        description: 'Command oversight dashboard tracking commercial fleet breakdowns, driver readiness, and DIFOT SLA reliability.',
+      },
+      {
+        id: 'ops-map',
+        label: 'Operations: Corridor Dispatch Routing',
+        url: 'app.logiflow.vn/dispatch/trips/26',
+        image: '/images/logiflow/logiflow-map.png',
+        tag: 'Operations: Leaflet Dispatch Map',
+        description: 'Interactive Leaflet corridor dispatch map with waypoint sequencing (P#51, D#51, P#52, D#52) and cargo manifests.',
+      },
+      {
+        id: 'ops-reports',
+        label: 'Operations: SLA & Latency Analytics',
+        url: 'app.logiflow.vn/dispatch/reports',
+        image: '/images/logiflow/logiflow-reports.png',
+        tag: 'Operations: Delay Analytics',
+        description: 'Operational reporting suite measuring linehaul volume, delay justifications, on-time SLA percentages, and transit latency.',
+      },
+    ],
+    image: '/images/logiflow/logiflow-dashboard.png',
+    liveHref: 'https://logiflow-client.onrender.com/',
     repoHref: 'https://github.com/ttnhan227/logiflow',
   },
 ]
@@ -217,9 +337,126 @@ function SkillIcon({ icon }) {
   )
 }
 
+function ExpandIcon() {
+  return (
+    <svg width="13" height="13" viewBox="0 0 16 16" fill="none" aria-hidden="true">
+      <path d="M10 2H14M14 2V6M14 2L9.5 6.5M6 14H2M2 14V10M2 14L6.5 9.5" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
+    </svg>
+  )
+}
+
+function CloseIcon() {
+  return (
+    <svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true">
+      <path d="M3 3L13 13M13 3L3 13" stroke="currentColor" strokeWidth="1.75" strokeLinecap="round" />
+    </svg>
+  )
+}
+
+function ChevronLeft() {
+  return (
+    <svg width="20" height="20" viewBox="0 0 16 16" fill="none" aria-hidden="true">
+      <path d="M10 3L5 8L10 13" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
+    </svg>
+  )
+}
+
+function ChevronRight() {
+  return (
+    <svg width="20" height="20" viewBox="0 0 16 16" fill="none" aria-hidden="true">
+      <path d="M6 3L11 8L6 13" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
+    </svg>
+  )
+}
+
+function Lightbox({ active, onClose }) {
+  if (!active) return null
+
+  const { items, currentIndex, projectTitle } = active
+  const item = items[currentIndex] || items[0]
+
+  const hasPrev = currentIndex > 0
+  const hasNext = currentIndex < items.length - 1
+
+  const goPrev = (e) => {
+    e.stopPropagation()
+    if (hasPrev) {
+      onClose({ ...active, currentIndex: currentIndex - 1 })
+    }
+  }
+
+  const goNext = (e) => {
+    e.stopPropagation()
+    if (hasNext) {
+      onClose({ ...active, currentIndex: currentIndex + 1 })
+    }
+  }
+
+  return (
+    <div className="lightbox-backdrop" onClick={() => onClose(null)} role="dialog" aria-modal="true" aria-label="Image Preview">
+      <div className="lightbox-dialog" onClick={(e) => e.stopPropagation()}>
+        {/* Lightbox Header */}
+        <div className="lightbox-header">
+          <div className="lightbox-meta">
+            <span className="lightbox-project-badge">{projectTitle}</span>
+            <span className="lightbox-counter">{currentIndex + 1} / {items.length}</span>
+            {item.tag && <span className="lightbox-tag">{item.tag}</span>}
+          </div>
+
+          <button className="lightbox-close-btn" type="button" onClick={() => onClose(null)} aria-label="Close image preview">
+            <span>Close (ESC)</span>
+            <CloseIcon />
+          </button>
+        </div>
+
+        {/* Lightbox Body */}
+        <div className="lightbox-body">
+          {items.length > 1 && (
+            <button
+              type="button"
+              className={`lightbox-nav-btn prev-btn ${!hasPrev ? 'is-disabled' : ''}`}
+              onClick={goPrev}
+              disabled={!hasPrev}
+              aria-label="Previous image"
+            >
+              <ChevronLeft />
+            </button>
+          )}
+
+          <div className="lightbox-image-wrap">
+            <img src={item.image} alt={item.label || `${projectTitle} preview`} />
+          </div>
+
+          {items.length > 1 && (
+            <button
+              type="button"
+              className={`lightbox-nav-btn next-btn ${!hasNext ? 'is-disabled' : ''}`}
+              onClick={goNext}
+              disabled={!hasNext}
+              aria-label="Next image"
+            >
+              <ChevronRight />
+            </button>
+          )}
+        </div>
+
+        {/* Lightbox Footer */}
+        <div className="lightbox-footer">
+          <div className="lightbox-caption-main">
+            {item.label && <strong className="lightbox-caption-title">{item.label}</strong>}
+            {item.description && <p className="lightbox-caption-text">{item.description}</p>}
+          </div>
+          {item.url && <code className="lightbox-url">{item.url}</code>}
+        </div>
+      </div>
+    </div>
+  )
+}
+
 function App() {
   const [menuOpen, setMenuOpen] = useState(false)
   const [copied, setCopied] = useState(false)
+  const [lightbox, setLightbox] = useState(null)
 
   const copyEmail = () => {
     navigator.clipboard.writeText('ttnhan227@gmail.com').then(() => {
@@ -227,6 +464,30 @@ function App() {
       setTimeout(() => setCopied(false), 2400)
     })
   }
+
+  const openLightbox = (items, currentIndex, projectTitle) => {
+    setLightbox({ items, currentIndex, projectTitle })
+  }
+
+  // Keyboard navigation for lightbox modal
+  useEffect(() => {
+    if (!lightbox) return
+    const handleKeyDown = (e) => {
+      if (e.key === 'Escape') setLightbox(null)
+      if (e.key === 'ArrowLeft' && lightbox.currentIndex > 0) {
+        setLightbox((prev) => prev ? { ...prev, currentIndex: prev.currentIndex - 1 } : null)
+      }
+      if (e.key === 'ArrowRight' && lightbox.currentIndex < lightbox.items.length - 1) {
+        setLightbox((prev) => prev ? { ...prev, currentIndex: prev.currentIndex + 1 } : null)
+      }
+    }
+    window.addEventListener('keydown', handleKeyDown)
+    document.body.style.overflow = 'hidden'
+    return () => {
+      window.removeEventListener('keydown', handleKeyDown)
+      document.body.style.overflow = ''
+    }
+  }, [lightbox])
 
   return (
     <div className="site-wrapper">
@@ -363,106 +624,261 @@ function App() {
             </div>
 
             <div className="project-feed">
-              {projects.map((project) => (
-                <article className="project-card" key={project.id} id={project.id}>
-                  {/* Top Metadata Header */}
-                  <div className="project-card-top">
-                    <div className="project-index-badge">
-                      <span className="project-num">{project.number}</span>
-                      <span className="project-category">{project.category}</span>
-                    </div>
-                    <span className="project-date">{project.date}</span>
-                  </div>
+              {projects.map((project) => {
+                const isQuadGrid = Boolean(project.showcaseGrid && project.showcaseGrid.length > 0)
 
-                  {/* Two-Column Showcase: Content & Visual Preview */}
-                  <div className="project-body-grid">
-                    <div className="project-info-col">
-                      <h3 className="project-name">{project.title}</h3>
-                      <p className="project-overview">{project.overview}</p>
-
-                      {/* Problem & Solution Breakdown */}
-                      <div className="project-challenge-box">
-                        <div className="challenge-item">
-                          <span className="challenge-label">The Challenge:</span>
-                          <p>{project.problem}</p>
+                if (isQuadGrid) {
+                  return (
+                    <article className="project-card project-card-full" key={project.id} id={project.id}>
+                      {/* Top Metadata Header */}
+                      <div className="project-card-top">
+                        <div className="project-index-badge">
+                          <span className="project-num">{project.number}</span>
+                          <span className="project-category">{project.category}</span>
                         </div>
-                        <div className="challenge-item">
-                          <span className="challenge-label">The Architectural Solution:</span>
-                          <p>{project.solution}</p>
+                        <span className="project-date">{project.date}</span>
+                      </div>
+
+                      {/* Info Section: Structured 2-Column Header */}
+                      <div className="project-header-grid">
+                        <div className="project-header-main">
+                          <h3 className="project-name">{project.title}</h3>
+                          <p className="project-overview">{project.overview}</p>
+
+                          {/* Problem & Solution Breakdown */}
+                          <div className="project-challenge-box">
+                            <div className="challenge-item">
+                              <span className="challenge-label">The Challenge:</span>
+                              <p>{project.problem}</p>
+                            </div>
+                            <div className="challenge-item">
+                              <span className="challenge-label">The Architectural Solution:</span>
+                              <p>{project.solution}</p>
+                            </div>
+                          </div>
+                        </div>
+
+                        <div className="project-header-side">
+                          {/* Technical Decisions Architecture List */}
+                          <div className="project-architecture-block">
+                            <span className="block-title">Key Architectural Highlights:</span>
+                            <ul className="arch-list">
+                              {project.architecture.map((item) => (
+                                <li key={item.label}>
+                                  <span className="arch-badge">{item.label}</span>
+                                  <span className="arch-detail">{item.detail}</span>
+                                </li>
+                              ))}
+                            </ul>
+                          </div>
+
+                          {/* Tech Stack Pills */}
+                          <div className="project-stack-wrap">
+                            {project.stack.map((tech) => (
+                              <span className="tech-tag" key={tech}>{tech}</span>
+                            ))}
+                          </div>
+
+                          {/* Actions */}
+                          <div className="project-actions-row">
+                            {project.liveHref && (
+                              <a
+                                className="btn-project btn-project-live"
+                                href={project.liveHref}
+                                target="_blank"
+                                rel="noreferrer"
+                              >
+                                <span>Live Application</span>
+                                <ArrowUpRight />
+                              </a>
+                            )}
+                            <a
+                              className="btn-project btn-project-code"
+                              href={project.repoHref}
+                              target="_blank"
+                              rel="noreferrer"
+                            >
+                              <span>Inspect Repository</span>
+                              <ArrowUpRight />
+                            </a>
+                          </div>
                         </div>
                       </div>
 
-                      {/* Technical Decisions Architecture List */}
-                      <div className="project-architecture-block">
-                        <span className="block-title">Key Architectural Highlights:</span>
-                        <ul className="arch-list">
-                          {project.architecture.map((item) => (
-                            <li key={item.label}>
-                              <span className="arch-badge">{item.label}</span>
-                              <span className="arch-detail">{item.detail}</span>
-                            </li>
+                      {/* Full-Width 4-Screen Showcase Grid */}
+                      <div className="project-showcase-section">
+                        <div className="showcase-section-header">
+                          <div className="showcase-section-title-wrap">
+                            <span className="showcase-section-tag">UI Architecture</span>
+                            <h4 className="showcase-section-title">
+                              System Interface Architecture — {project.showcaseGrid.length} Key Views
+                            </h4>
+                          </div>
+                          <span className="showcase-hint">
+                            <ExpandIcon />
+                            <span>Click any preview to expand full-screen</span>
+                          </span>
+                        </div>
+
+                        <div className="showcase-quad-grid">
+                          {project.showcaseGrid.map((item, idx) => (
+                            <div
+                              key={item.id}
+                              className="interface-frame grid-frame clickable-frame"
+                              onClick={() => openLightbox(project.showcaseGrid, idx, project.title)}
+                              role="button"
+                              tabIndex={0}
+                              onKeyDown={(e) => { if (e.key === 'Enter' || e.key === ' ') openLightbox(project.showcaseGrid, idx, project.title) }}
+                              aria-label={`Expand ${item.label}`}
+                            >
+                              <div className="interface-frame-bar">
+                                <div className="frame-dots">
+                                  <span className="frame-dot" />
+                                  <span className="frame-dot" />
+                                  <span className="frame-dot" />
+                                </div>
+                                <span className="frame-url">{item.url}</span>
+                                {item.tag && <span className="frame-tag-badge">{item.tag}</span>}
+                              </div>
+
+                              <div className="interface-viewport">
+                                <img src={item.image} alt={item.label} loading="lazy" />
+                                <div className="viewport-hover-overlay">
+                                  <span className="overlay-zoom-pill">
+                                    <ExpandIcon />
+                                    <span>Expand in High-Res</span>
+                                  </span>
+                                </div>
+                              </div>
+
+                              <div className="interface-caption">
+                                <span className="caption-dot" />
+                                <span className="caption-label">{item.label}</span>
+                              </div>
+                            </div>
                           ))}
-                        </ul>
+                        </div>
                       </div>
+                    </article>
+                  )
+                }
 
-                      {/* Tech Stack Pills */}
-                      <div className="project-stack-wrap">
-                        {project.stack.map((tech) => (
-                          <span className="tech-tag" key={tech}>{tech}</span>
-                        ))}
+                // Default 2-column layout for single-image projects (Groundwork, VeriSpend)
+                return (
+                  <article className="project-card" key={project.id} id={project.id}>
+                    {/* Top Metadata Header */}
+                    <div className="project-card-top">
+                      <div className="project-index-badge">
+                        <span className="project-num">{project.number}</span>
+                        <span className="project-category">{project.category}</span>
                       </div>
+                      <span className="project-date">{project.date}</span>
+                    </div>
 
-                      {/* Actions: Live Demo & GitHub Code */}
-                      <div className="project-actions-row">
-                        {project.liveHref && (
+                    {/* Two-Column Showcase: Content & Visual Preview */}
+                    <div className="project-body-grid">
+                      <div className="project-info-col">
+                        <h3 className="project-name">{project.title}</h3>
+                        <p className="project-overview">{project.overview}</p>
+
+                        {/* Problem & Solution Breakdown */}
+                        <div className="project-challenge-box">
+                          <div className="challenge-item">
+                            <span className="challenge-label">The Challenge:</span>
+                            <p>{project.problem}</p>
+                          </div>
+                          <div className="challenge-item">
+                            <span className="challenge-label">The Architectural Solution:</span>
+                            <p>{project.solution}</p>
+                          </div>
+                        </div>
+
+                        {/* Technical Decisions Architecture List */}
+                        <div className="project-architecture-block">
+                          <span className="block-title">Key Architectural Highlights:</span>
+                          <ul className="arch-list">
+                            {project.architecture.map((item) => (
+                              <li key={item.label}>
+                                <span className="arch-badge">{item.label}</span>
+                                <span className="arch-detail">{item.detail}</span>
+                              </li>
+                            ))}
+                          </ul>
+                        </div>
+
+                        {/* Tech Stack Pills */}
+                        <div className="project-stack-wrap">
+                          {project.stack.map((tech) => (
+                            <span className="tech-tag" key={tech}>{tech}</span>
+                          ))}
+                        </div>
+
+                        {/* Actions: Live Demo & GitHub Code */}
+                        <div className="project-actions-row">
+                          {project.liveHref && (
+                            <a
+                              className="btn-project btn-project-live"
+                              href={project.liveHref}
+                              target="_blank"
+                              rel="noreferrer"
+                            >
+                              <span>Live Application</span>
+                              <ArrowUpRight />
+                            </a>
+                          )}
                           <a
-                            className="btn-project btn-project-live"
-                            href={project.liveHref}
+                            className="btn-project btn-project-code"
+                            href={project.repoHref}
                             target="_blank"
                             rel="noreferrer"
                           >
-                            <span>Live Application</span>
+                            <span>Inspect Repository</span>
                             <ArrowUpRight />
                           </a>
-                        )}
-                        <a
-                          className="btn-project btn-project-code"
-                          href={project.repoHref}
-                          target="_blank"
-                          rel="noreferrer"
-                        >
-                          <span>Inspect Repository</span>
-                          <ArrowUpRight />
-                        </a>
+                        </div>
                       </div>
-                    </div>
 
-                    <div className="project-visual-col">
-                      <div className="interface-frame">
-                        <div className="interface-frame-bar">
-                          <div className="frame-dots">
-                            <span className="frame-dot" />
-                            <span className="frame-dot" />
-                            <span className="frame-dot" />
+                      <div className="project-visual-col">
+                        <div
+                          className="interface-frame clickable-frame"
+                          onClick={() => openLightbox([{ image: project.image, label: `${project.title} Interface Preview`, url: project.liveHref ? new URL(project.liveHref).hostname : `github.com/ttnhan227/${project.title.toLowerCase()}` }], 0, project.title)}
+                          role="button"
+                          tabIndex={0}
+                          onKeyDown={(e) => { if (e.key === 'Enter' || e.key === ' ') openLightbox([{ image: project.image, label: `${project.title} Interface Preview`, url: project.liveHref ? new URL(project.liveHref).hostname : `github.com/ttnhan227/${project.title.toLowerCase()}` }], 0, project.title) }}
+                          aria-label={`Expand ${project.title} preview`}
+                        >
+                          <div className="interface-frame-bar">
+                            <div className="frame-dots">
+                              <span className="frame-dot" />
+                              <span className="frame-dot" />
+                              <span className="frame-dot" />
+                            </div>
+                            <span className="frame-url">
+                              {project.liveHref
+                                ? new URL(project.liveHref).hostname
+                                : `github.com/ttnhan227/${project.title.toLowerCase()}`}
+                            </span>
+                            <div className="frame-dots-placeholder" />
                           </div>
-                          <span className="frame-url">
-                            {project.liveHref
-                              ? new URL(project.liveHref).hostname
-                              : `github.com/ttnhan227/${project.title.toLowerCase()}`}
-                          </span>
-                        </div>
-                        <div className="interface-viewport">
-                          <img
-                            src={project.image}
-                            alt={`${project.title} interface preview`}
-                            loading="lazy"
-                          />
+                          <div className="interface-viewport">
+                            <img
+                              src={project.image}
+                              alt={`${project.title} interface preview`}
+                              loading="lazy"
+                            />
+                            <div className="viewport-hover-overlay">
+                              <span className="overlay-zoom-pill">
+                                <ExpandIcon />
+                                <span>Expand in High-Res</span>
+                              </span>
+                            </div>
+                          </div>
                         </div>
                       </div>
                     </div>
-                  </div>
-                </article>
-              ))}
+                  </article>
+                )
+              })}
             </div>
           </div>
         </section>
@@ -665,6 +1081,9 @@ function App() {
           </div>
         </section>
       </main>
+
+      {/* Fullscreen Lightbox Modal */}
+      <Lightbox active={lightbox} onClose={setLightbox} />
     </div>
   )
 }
