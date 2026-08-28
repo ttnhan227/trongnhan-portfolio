@@ -1,0 +1,32 @@
+export const otherBuilds = [
+  {
+    id: 'shineup',
+    questCode: 'QUEST_01',
+    title: 'ShineUp',
+    date: '2025',
+    category: 'Talent Showcasing Platform',
+    description: 'Online creative portfolio and talent exhibition platform with multimedia submission feeds and creator discovery workflows.',
+    stack: ['C#', 'ASP.NET Core', 'React', 'SQL Server'],
+    repoHref: 'https://github.com/ttnhan227/ShineUp',
+  },
+  {
+    id: 'coffee-management',
+    questCode: 'QUEST_02',
+    title: 'CoffeeManagementSystem',
+    date: '2024',
+    category: 'Desktop POS & Retail System',
+    description: 'Desktop point-of-sale and retail inventory management system with order processing, shift audit logs, and receipt printing.',
+    stack: ['Java', 'Swing/JavaFX', 'MySQL', 'JDBC'],
+    repoHref: 'https://github.com/ttnhan227/CoffeeManagementSystem',
+  },
+  {
+    id: 'yuibot',
+    questCode: 'QUEST_03',
+    title: 'yuibot',
+    date: '2025',
+    category: 'Community Automation Bot',
+    description: 'Asynchronous event-driven Discord automation bot with moderation tools, audio feeds, and dynamic server utilities.',
+    stack: ['Python', 'asyncio', 'discord.py', 'REST APIs'],
+    repoHref: 'https://github.com/ttnhan227/yuibot',
+  },
+]
