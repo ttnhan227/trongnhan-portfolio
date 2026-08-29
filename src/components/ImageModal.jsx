@@ -1,5 +1,6 @@
 import { useEffect } from 'react'
 import { CloseIcon } from './Icons'
+import { playSfx } from '../utils/audio'
 
 export default function ImageModal({ image, onClose, onPrev, onNext, hasPrev, hasNext }) {
   useEffect(() => {
@@ -7,10 +8,13 @@ export default function ImageModal({ image, onClose, onPrev, onNext, hasPrev, ha
 
     const handleKeyDown = (e) => {
       if (e.key === 'Escape') {
+        playSfx('close')
         onClose()
       } else if (e.key === 'ArrowLeft' && hasPrev && onPrev) {
+        playSfx('cursor')
         onPrev()
       } else if (e.key === 'ArrowRight' && hasNext && onNext) {
+        playSfx('cursor')
         onNext()
       }
     }

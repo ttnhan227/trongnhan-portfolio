@@ -1,6 +1,6 @@
 export default function RpgIcon({ id, size = 32, alt = '', className = '' }) {
-  // Use the exact icon path from the downloaded assets folder
-  const iconPath = `/images/assets/icons/32x32/${id}.png`
+  // Use the exact icon path from the styles/icons folder
+  const iconPath = `/styles/icons/32x32/${id}.png`
   
   return (
     <img

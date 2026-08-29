@@ -14,6 +14,12 @@ test.describe("Developer Portfolio Showcase & Interaction E2E Suite", () => {
     await expect(page.locator("#recon-qa")).toBeVisible();
     await expect(page.locator("#verispend")).toBeVisible();
     await expect(page.locator("#logiflow")).toBeVisible();
+
+    // Verify navbar sticks to the top when scrolling
+    await page.evaluate(() => window.scrollTo(0, 1000));
+    await page.waitForTimeout(200);
+    const headerBox = await page.locator("header.site-header").boundingBox();
+    expect(headerBox?.y).toBe(0);
   });
 
   test("2. Mission Stage Selector tabs, architecture pipeline, and keyboard shortcuts", async ({ page }) => {

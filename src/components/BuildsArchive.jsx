@@ -1,6 +1,7 @@
 import { ArrowUpRight } from './Icons'
 import RpgIcon from './RpgIcon'
 import { otherBuilds } from '../data/builds'
+import { playSfx } from '../utils/audio'
 
 const buildIcons = [14, 10, 6]
 
@@ -9,7 +10,7 @@ export default function BuildsArchive() {
     <section className="builds-section" id="builds" aria-labelledby="builds-heading">
       <div className="hud-content-container">
         {/* Section Header */}
-        <div className="section-title-bar pixel-box-sm">
+        <div className="section-title-bar rpg-panel-sm">
           <div className="title-bar-left">
             <RpgIcon id={10} size={22} alt="Bounty Board" />
             <span className="section-index-tag">05 // BOUNTY BOARD</span>
@@ -22,36 +23,52 @@ export default function BuildsArchive() {
         {/* Side Quest Grid */}
         <div className="side-quests-grid">
           {otherBuilds.map((build, bIdx) => (
-            <article className="side-quest-card pixel-box" key={build.id}>
-              <div className="quest-top-meta">
+            <article
+              className="side-quest-card rpg-panel"
+              key={build.id}
+              onMouseEnter={() => playSfx('cursor')}
+            >
+              <div className="side-quest-header rpg-panel-header">
                 <div className="quest-code-wrap">
                   <RpgIcon id={buildIcons[bIdx] || 10} size={18} alt="" />
-                  <span className="quest-code-badge">{build.questCode}</span>
+                  <span className="quest-code-badge">BOUNTY #{bIdx + 1} // {build.questCode}</span>
                 </div>
                 <span className="quest-year-tag">{build.date}</span>
               </div>
 
-              <h3 className="quest-name">{build.title}</h3>
-              <span className="quest-sub-category">{build.category}</span>
+              <div className="side-quest-body">
+                <h3 className="quest-name">{build.title}</h3>
+                <span className="quest-sub-category">{build.category}</span>
 
-              <p className="quest-narrative">{build.description}</p>
+                <p className="quest-narrative">{build.description}</p>
 
-              <div className="quest-tech-strip">
-                {build.stack.map((item) => (
-                  <span className="pixel-tech-tag-sm" key={item}>{item}</span>
-                ))}
+                <div className="quest-status-row">
+                  <span className="status-label">STATUS:</span>
+                  <span className="status-val-cleared">✓ CLEARED</span>
+                </div>
+
+                <div className="quest-tech-strip">
+                  <span className="rewards-label">REWARDS:</span>
+                  <div className="rewards-tags-wrap">
+                    {build.stack.map((item) => (
+                      <span className="pixel-tech-tag-sm" key={item} onMouseEnter={() => playSfx('cursor')}>{item}</span>
+                    ))}
+                  </div>
+                </div>
+
+                <a
+                  className="quest-action-link pixel-btn-action repo-btn"
+                  href={build.repoHref}
+                  target="_blank"
+                  rel="noreferrer"
+                  onClick={() => playSfx('select')}
+                  onMouseEnter={() => playSfx('cursor')}
+                >
+                  <RpgIcon id={1} size={14} alt="" />
+                  <span>📜 VIEW REPO</span>
+                  <ArrowUpRight />
+                </a>
               </div>
-
-              <a
-                className="quest-action-link pixel-btn-action repo-btn"
-                href={build.repoHref}
-                target="_blank"
-                rel="noreferrer"
-              >
-                <RpgIcon id={1} size={14} alt="" />
-                <span>📜 VIEW REPO</span>
-                <ArrowUpRight />
-              </a>
             </article>
           ))}
         </div>

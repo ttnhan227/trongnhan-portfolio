@@ -1,5 +1,6 @@
 import { tacticalLoadout } from '../data/skills'
 import RpgIcon from './RpgIcon'
+import { playSfx } from '../utils/audio'
 
 const categoryIconIds = [1, 29, 11, 33]
 
@@ -40,12 +41,12 @@ export default function LoadoutSection() {
     <section className="loadout-section" id="loadout" aria-labelledby="loadout-heading">
       <div className="hud-content-container">
         {/* Section Header */}
-        <div className="section-title-bar pixel-box-sm">
+        <div className="section-title-bar rpg-panel-sm">
           <div className="title-bar-left">
             <RpgIcon id={29} size={22} alt="Armory" />
             <span className="section-index-tag">04 // ARMORY</span>
             <h2 className="section-title" id="loadout-heading">
-              Technical Armory & Equipment Loadout
+              Technical Armory & Inventory Loadout
             </h2>
           </div>
         </div>
@@ -53,8 +54,8 @@ export default function LoadoutSection() {
         {/* 4 Inventory Slots Grid */}
         <div className="inventory-slots-grid" id="stack">
           {tacticalLoadout.map((category, catIdx) => (
-            <div className="inventory-slot-card pixel-box" key={category.category}>
-              <div className="slot-card-header">
+            <div className="inventory-slot-card rpg-panel" key={category.category}>
+              <div className="slot-card-header rpg-panel-header">
                 <div className="slot-header-top">
                   <RpgIcon
                     id={categoryIconIds[catIdx] || 1}
@@ -75,7 +76,12 @@ export default function LoadoutSection() {
                 {category.skills.map((skill) => {
                   const iconId = skillIconMap[skill.name] || 1
                   return (
-                    <div className="inventory-item-card pixel-frame-xs" key={skill.name}>
+                    <div
+                      className="inventory-item-card rpg-slot"
+                      key={skill.name}
+                      onMouseEnter={() => playSfx('cursor')}
+                      onClick={() => playSfx('equip')}
+                    >
                       <div className="item-icon-box">
                         <RpgIcon id={iconId} size={20} alt={skill.name} />
                       </div>

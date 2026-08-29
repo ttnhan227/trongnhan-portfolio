@@ -2,6 +2,7 @@ import { useState, useEffect } from 'react'
 import { ArrowUpRight } from './Icons'
 import RpgIcon from './RpgIcon'
 import { flagshipMissions } from '../data/projects'
+import { playSfx } from '../utils/audio'
 
 const questIcons = [
   11, // Quest 01 Groundwork: Scroll / Oracle
@@ -37,11 +38,13 @@ export default function MissionSelector({ onSelectImage, activeStageIndex, setAc
   // Next / Prev handlers
   const handlePrevImage = (e) => {
     e.stopPropagation()
+    playSfx('cursor')
     setSelectedScreenshotIndex((prev) => (prev === 0 ? screenshots.length - 1 : prev - 1))
   }
 
   const handleNextImage = (e) => {
     e.stopPropagation()
+    playSfx('cursor')
     setSelectedScreenshotIndex((prev) => (prev + 1) % screenshots.length)
   }
 
@@ -52,6 +55,7 @@ export default function MissionSelector({ onSelectImage, activeStageIndex, setAc
       if (e.key >= '1' && e.key <= '4') {
         const index = parseInt(e.key, 10) - 1
         if (index < flagshipMissions.length) {
+          playSfx('select')
           setActiveStageIndex(index)
         }
       }
@@ -64,7 +68,7 @@ export default function MissionSelector({ onSelectImage, activeStageIndex, setAc
     <section className="missions-section" id="missions" aria-labelledby="missions-heading">
       <div className="hud-content-container">
         {/* Section Title Header */}
-        <div className="section-title-bar pixel-box-sm">
+        <div className="section-title-bar rpg-panel-sm">
           <div className="title-bar-left">
             <RpgIcon id={14} size={22} alt="Quest Log" />
             <span className="section-index-tag">02 // QUEST LOG</span>
@@ -83,7 +87,7 @@ export default function MissionSelector({ onSelectImage, activeStageIndex, setAc
           </div>
         </div>
 
-        {/* 4 Quest Stage Selector Tabs with Downloaded RPG Icons */}
+        {/* 4 Quest Stage Selector Tabs */}
         <div className="stage-menu-grid" role="tablist" aria-label="Quest Selector">
           {flagshipMissions.map((mission, index) => {
             const isSelected = index === activeStageIndex
@@ -96,8 +100,12 @@ export default function MissionSelector({ onSelectImage, activeStageIndex, setAc
                 role="tab"
                 aria-selected={isSelected}
                 tabIndex={isSelected ? 0 : -1}
-                className={`stage-menu-slot pixel-box-sm ${isSelected ? 'is-selected' : ''}`}
-                onClick={() => setActiveStageIndex(index)}
+                className={`stage-menu-slot rpg-panel-sm ${isSelected ? 'is-selected' : ''}`}
+                onClick={() => {
+                  playSfx('select')
+                  setActiveStageIndex(index)
+                }}
+                onMouseEnter={() => playSfx('cursor')}
               >
                 <div className="slot-top-row">
                   <span className="slot-cursor">{isSelected ? '▶' : ' '}</span>
@@ -120,12 +128,12 @@ export default function MissionSelector({ onSelectImage, activeStageIndex, setAc
         </div>
 
         {/* Main Quest Showcase Box */}
-        <div className="mission-showcase-box pixel-box">
+        <div className="mission-showcase-box rpg-panel">
           {/* Mission Box Header */}
-          <div className="mission-box-header">
+          <div className="mission-box-header rpg-panel-header">
             <div className="mission-header-left">
               {currentMission.logo && (
-                <div className="mission-logo-badge">
+                <div className="mission-logo-badge rpg-slot" onMouseEnter={() => playSfx('cursor')}>
                   <img src={currentMission.logo} alt={`${currentMission.title} Logo`} className="mission-logo-img" />
                 </div>
               )}
@@ -134,6 +142,7 @@ export default function MissionSelector({ onSelectImage, activeStageIndex, setAc
                   <RpgIcon id={questIcons[activeStageIndex] || 1} size={18} alt="" />
                   <span className="code-text">QUEST 0{activeStageIndex + 1}: {currentMission.title.toUpperCase()}</span>
                   <span className="code-date">({currentMission.date})</span>
+                  <span className="quest-rank-tag">RANK: S // GUILD BOUNTY</span>
                 </div>
                 <h3 className="mission-headline">{currentMission.tagline}</h3>
               </div>
@@ -146,6 +155,8 @@ export default function MissionSelector({ onSelectImage, activeStageIndex, setAc
                   href={currentMission.liveHref}
                   target="_blank"
                   rel="noreferrer"
+                  onClick={() => playSfx('select')}
+                  onMouseEnter={() => playSfx('cursor')}
                 >
                   <RpgIcon id={13} size={14} alt="" />
                   <span>LIVE DEMO</span>
@@ -158,6 +169,8 @@ export default function MissionSelector({ onSelectImage, activeStageIndex, setAc
                   href={currentMission.pypiHref}
                   target="_blank"
                   rel="noreferrer"
+                  onClick={() => playSfx('equip')}
+                  onMouseEnter={() => playSfx('cursor')}
                 >
                   <RpgIcon id={11} size={14} alt="" />
                   <span>PYPI PACKAGE</span>
@@ -170,6 +183,8 @@ export default function MissionSelector({ onSelectImage, activeStageIndex, setAc
                   href={currentMission.repoHref}
                   target="_blank"
                   rel="noreferrer"
+                  onClick={() => playSfx('select')}
+                  onMouseEnter={() => playSfx('cursor')}
                 >
                   <RpgIcon id={1} size={14} alt="" />
                   <span>GITHUB REPO</span>
@@ -179,9 +194,9 @@ export default function MissionSelector({ onSelectImage, activeStageIndex, setAc
             </div>
           </div>
 
-          {/* LARGE INTERACTIVE SMOOTH SLIDING SCREENSHOT CAROUSEL */}
+          {/* LARGE INTERACTIVE SCREENSHOT CAROUSEL */}
           <div
-            className="large-screenshot-frame"
+            className="large-screenshot-frame rpg-frame"
             onMouseEnter={() => setIsHovered(true)}
             onMouseLeave={() => setIsHovered(false)}
           >
@@ -199,15 +214,19 @@ export default function MissionSelector({ onSelectImage, activeStageIndex, setAc
               </div>
             </div>
 
-            {/* Clickable Image Viewport with Smooth Sliding Track & Carousel Arrows */}
+            {/* Clickable Image Viewport */}
             <div
               className="screen-viewport clickable-screen"
               role="button"
               tabIndex={0}
-              onClick={() => onSelectImage(currentScreenshot)}
+              onClick={() => {
+                playSfx('select')
+                onSelectImage(currentScreenshot)
+              }}
               onKeyDown={(e) => {
                 if (e.key === 'Enter' || e.key === ' ') {
                   e.preventDefault()
+                  playSfx('select')
                   onSelectImage(currentScreenshot)
                 }
               }}
@@ -269,7 +288,11 @@ export default function MissionSelector({ onSelectImage, activeStageIndex, setAc
                         key={s.id}
                         type="button"
                         className={`view-toggle-btn ${isViewActive ? 'is-active' : ''}`}
-                        onClick={() => setSelectedScreenshotIndex(sIdx)}
+                        onClick={() => {
+                          playSfx('select')
+                          setSelectedScreenshotIndex(sIdx)
+                        }}
+                        onMouseEnter={() => playSfx('cursor')}
                         aria-pressed={isViewActive}
                       >
                         <span className="view-btn-cursor">{isViewActive ? '▶' : ''}</span>
@@ -282,16 +305,44 @@ export default function MissionSelector({ onSelectImage, activeStageIndex, setAc
             )}
           </div>
 
-          {/* Clean 2-Column Project Brief & Highlights */}
+          {/* 2-Column Project Brief & Highlights */}
           <div className="mission-details-grid">
-            {/* Left: Overview & Key Engineering Highlights */}
+            {/* Left: Overview, Pipeline & Key Engineering Highlights */}
             <div className="mission-brief-col">
-              <p className="mission-brief-overview">{currentMission.overview}</p>
+              <div className="quest-objective-box rpg-panel-xs">
+                <div className="objective-header">
+                  <RpgIcon id={11} size={16} alt="" />
+                  <span className="objective-label">QUEST OBJECTIVE:</span>
+                </div>
+                <p className="mission-brief-overview">{currentMission.overview}</p>
+              </div>
 
-              <div className="decisions-panel pixel-box-sm">
+              {/* Quest Execution Pipeline */}
+              {currentMission.pipeline && currentMission.pipeline.length > 0 && (
+                <div className="quest-pipeline-panel rpg-panel-xs">
+                  <div className="panel-title-wrap">
+                    <RpgIcon id={14} size={18} alt="Pipeline" />
+                    <h4 className="panel-title">QUEST PIPELINE // EXECUTION PHASES</h4>
+                  </div>
+                  <div className="pipeline-steps-list">
+                    {currentMission.pipeline.map((step) => (
+                      <div className="pipeline-step-item" key={step.step}>
+                        <span className="step-badge">STAGE {step.step}</span>
+                        <div className="step-info">
+                          <strong className="step-label">{step.label}:</strong>
+                          <span className="step-detail">{step.detail}</span>
+                        </div>
+                      </div>
+                    ))}
+                  </div>
+                </div>
+              )}
+
+              {/* Boss Cleared Highlights */}
+              <div className="decisions-panel rpg-panel-xs">
                 <div className="panel-title-wrap">
                   <RpgIcon id={36} size={18} alt="Victory" />
-                  <h4 className="panel-title">BOSS CLEARED // HIGHLIGHTS</h4>
+                  <h4 className="panel-title">BOSS CLEARED // TACTICAL HIGHLIGHTS</h4>
                 </div>
                 <ul className="decisions-list">
                   {currentMission.architecture.map((item, idx) => (
@@ -304,9 +355,9 @@ export default function MissionSelector({ onSelectImage, activeStageIndex, setAc
               </div>
             </div>
 
-            {/* Right: Clean Specs & Tech Loadout */}
+            {/* Right: Guild Specs & Tech Loadout */}
             <div className="mission-specs-col">
-              <div className="telemetry-panel pixel-box-sm">
+              <div className="telemetry-panel rpg-panel-xs">
                 <div className="specs-meta-item">
                   <span className="spec-label">GUILD ROLE:</span>
                   <strong className="spec-val">{currentMission.role}</strong>
@@ -314,7 +365,7 @@ export default function MissionSelector({ onSelectImage, activeStageIndex, setAc
 
                 <div className="telemetry-grid">
                   {currentMission.metrics.map((m, idx) => (
-                    <div className="telemetry-box" key={idx}>
+                    <div className="telemetry-box rpg-slot" key={idx}>
                       <span className="t-label">{m.label}</span>
                       <strong className="t-val">{m.value}</strong>
                     </div>
@@ -322,7 +373,7 @@ export default function MissionSelector({ onSelectImage, activeStageIndex, setAc
                 </div>
 
                 <div className="stack-loadout-wrap">
-                  <span className="loadout-title">PARTY LOADOUT:</span>
+                  <span className="loadout-title">PARTY REWARDS & LOADOUT:</span>
                   <div className="stack-tags-cloud">
                     {currentMission.stack.map((t) => (
                       <span className="pixel-tech-tag" key={t}>{t}</span>
