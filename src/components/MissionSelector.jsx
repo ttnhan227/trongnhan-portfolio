@@ -326,7 +326,11 @@ export default function MissionSelector({ onSelectImage, activeStageIndex, setAc
                   </div>
                   <div className="pipeline-steps-list">
                     {currentMission.pipeline.map((step) => (
-                      <div className="pipeline-step-item" key={step.step}>
+                      <div
+                        className="pipeline-step-item"
+                        key={step.step}
+                        onMouseEnter={() => playSfx('cursor')}
+                      >
                         <span className="step-badge">STAGE {step.step}</span>
                         <div className="step-info">
                           <strong className="step-label">{step.label}:</strong>
@@ -346,7 +350,11 @@ export default function MissionSelector({ onSelectImage, activeStageIndex, setAc
                 </div>
                 <ul className="decisions-list">
                   {currentMission.architecture.map((item, idx) => (
-                    <li key={idx} className="decision-item">
+                    <li
+                      key={idx}
+                      className="decision-item"
+                      onMouseEnter={() => playSfx('cursor')}
+                    >
                       <span className="decision-arrow">▹</span>
                       <span>{item}</span>
                     </li>
@@ -358,14 +366,18 @@ export default function MissionSelector({ onSelectImage, activeStageIndex, setAc
             {/* Right: Guild Specs & Tech Loadout */}
             <div className="mission-specs-col">
               <div className="telemetry-panel rpg-panel-xs">
-                <div className="specs-meta-item">
+                <div className="specs-meta-item" onMouseEnter={() => playSfx('cursor')}>
                   <span className="spec-label">GUILD ROLE:</span>
                   <strong className="spec-val">{currentMission.role}</strong>
                 </div>
 
                 <div className="telemetry-grid">
                   {currentMission.metrics.map((m, idx) => (
-                    <div className="telemetry-box rpg-slot" key={idx}>
+                    <div
+                      className="telemetry-box rpg-slot"
+                      key={idx}
+                      onMouseEnter={() => playSfx('cursor')}
+                    >
                       <span className="t-label">{m.label}</span>
                       <strong className="t-val">{m.value}</strong>
                     </div>
@@ -376,7 +388,13 @@ export default function MissionSelector({ onSelectImage, activeStageIndex, setAc
                   <span className="loadout-title">PARTY REWARDS & LOADOUT:</span>
                   <div className="stack-tags-cloud">
                     {currentMission.stack.map((t) => (
-                      <span className="pixel-tech-tag" key={t}>{t}</span>
+                      <span
+                        className="pixel-tech-tag"
+                        key={t}
+                        onMouseEnter={() => playSfx('cursor')}
+                      >
+                        {t}
+                      </span>
                     ))}
                   </div>
                 </div>

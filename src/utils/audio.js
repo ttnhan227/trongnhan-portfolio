@@ -18,7 +18,7 @@ export const BGM_TRACKS = [
   { id: 'forest', name: 'Enchanted Forest Ambience', src: '/styles/audio/bgm-forest.mp3' },
 ]
 
-let isSfxEnabled = false
+let isSfxEnabled = true
 let isBgmPlaying = false
 let currentTrackIndex = 0
 let bgmAudio = null
@@ -53,6 +53,8 @@ export function initAudio() {
   const storedSfx = localStorage.getItem('rpg_sfx_enabled')
   if (storedSfx !== null) {
     isSfxEnabled = storedSfx === 'true'
+  } else {
+    isSfxEnabled = true
   }
 
   const storedTrack = localStorage.getItem('rpg_bgm_track')
@@ -117,8 +119,17 @@ function startBgm() {
     bgmAudio = new Audio(track.src)
     bgmAudio.loop = true
     bgmAudio.volume = 0.3
+    // Fallback event listener in case browser ignores loop flag
+    bgmAudio.addEventListener('ended', () => {
+      if (isBgmPlaying && bgmAudio) {
+        bgmAudio.currentTime = 0
+        bgmAudio.play().catch(() => {})
+      }
+    })
   } else {
     bgmAudio.src = track.src
+    bgmAudio.loop = true
+    bgmAudio.currentTime = 0
   }
 
   isBgmPlaying = true

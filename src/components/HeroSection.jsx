@@ -123,28 +123,28 @@ export default function HeroSection() {
 
               {/* RPG Character Attribute Matrix with Thematic Icons */}
               <div className="rpg-attributes-grid">
-                <div className="attribute-pill rpg-slot">
+                <div className="attribute-pill rpg-slot" onMouseEnter={() => playSfx('cursor')}>
                   <div className="attr-left">
                     <RpgIcon id={3} size={18} alt="STR Weapon" />
                     <span className="attr-name">STR (BACKEND)</span>
                   </div>
                   <strong className="attr-score">88</strong>
                 </div>
-                <div className="attribute-pill rpg-slot">
+                <div className="attribute-pill rpg-slot" onMouseEnter={() => playSfx('cursor')}>
                   <div className="attr-left">
                     <RpgIcon id={11} size={18} alt="INT Scroll" />
                     <span className="attr-name">INT (AI & RAG)</span>
                   </div>
                   <strong className="attr-score">94</strong>
                 </div>
-                <div className="attribute-pill rpg-slot">
+                <div className="attribute-pill rpg-slot" onMouseEnter={() => playSfx('cursor')}>
                   <div className="attr-left">
                     <RpgIcon id={2} size={18} alt="AGI Dagger" />
                     <span className="attr-name">AGI (ASYNC / WS)</span>
                   </div>
                   <strong className="attr-score">90</strong>
                 </div>
-                <div className="attribute-pill rpg-slot">
+                <div className="attribute-pill rpg-slot" onMouseEnter={() => playSfx('cursor')}>
                   <div className="attr-left">
                     <RpgIcon id={30} size={18} alt="DEF Shield" />
                     <span className="attr-name">DEF (CI/CD DOCKER)</span>
@@ -276,13 +276,13 @@ export default function HeroSection() {
                   </div>
                   <span className="guild-certified-title">S-RANK CERTIFIED ARTIFICER</span>
                   <div className="sprite-badge-row">
-                    <span className="badge-item">
+                    <span className="badge-item" onMouseEnter={() => playSfx('cursor')}>
                       <RpgIcon id={1} size={14} alt="" /> BACKEND
                     </span>
-                    <span className="badge-item">
+                    <span className="badge-item" onMouseEnter={() => playSfx('cursor')}>
                       <RpgIcon id={29} size={14} alt="" /> DISTRIBUTED
                     </span>
-                    <span className="badge-item">
+                    <span className="badge-item" onMouseEnter={() => playSfx('cursor')}>
                       <RpgIcon id={11} size={14} alt="" /> AI VERIFIED
                     </span>
                   </div>
@@ -294,14 +294,14 @@ export default function HeroSection() {
                 <div className="passives-header">
                   <span className="passives-title">PASSIVE ABILITIES</span>
                 </div>
-                <div className="passive-row">
+                <div className="passive-row" onMouseEnter={() => playSfx('cursor')}>
                   <RpgIcon id={34} size={22} alt="Passive Icon" className="passive-rpg-icon" />
                   <div className="passive-text">
                     <strong className="passive-name">Passive: Citation Sentinel</strong>
                     <span className="passive-desc">Cross-checks AI claims against physical source records to prevent phantom hallucinations.</span>
                   </div>
                 </div>
-                <div className="passive-row">
+                <div className="passive-row" onMouseEnter={() => playSfx('cursor')}>
                   <RpgIcon id={6} size={22} alt="Passive Icon" className="passive-rpg-icon" />
                   <div className="passive-text">
                     <strong className="passive-name">Passive: Bounded Concurrency</strong>
@@ -321,15 +321,15 @@ export default function HeroSection() {
                 </div>
 
                 <div className="player-profile-grid">
-                  <div className="profile-meta-row">
+                  <div className="profile-meta-row" onMouseEnter={() => playSfx('cursor')}>
                     <span className="meta-label">PLATFORMS:</span>
                     <span className="meta-val">PC · Mobile · Console</span>
                   </div>
-                  <div className="profile-meta-row">
+                  <div className="profile-meta-row" onMouseEnter={() => playSfx('cursor')}>
                     <span className="meta-label">FAVORITE GENRES:</span>
                     <span className="meta-val genres-list">FPS · RPG · MMORPG · GACHA · RTS · ACTION · SOULSLIKE</span>
                   </div>
-                  <div className="profile-meta-row">
+                  <div className="profile-meta-row" onMouseEnter={() => playSfx('cursor')}>
                     <span className="meta-label">PLAYER INSTINCT:</span>
                     <span className="meta-val instinct-val">Mechanics · UX · Game Balance · Edge Case Bugs</span>
                   </div>
