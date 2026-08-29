@@ -101,7 +101,11 @@ export default function MissionSelector({ onSelectImage, activeStageIndex, setAc
               >
                 <div className="slot-top-row">
                   <span className="slot-cursor">{isSelected ? '▶' : ' '}</span>
-                  <RpgIcon id={iconId} size={18} alt="" />
+                  {mission.logo ? (
+                    <img src={mission.logo} alt="" className="slot-logo-badge" />
+                  ) : (
+                    <RpgIcon id={iconId} size={18} alt="" />
+                  )}
                   <span className="slot-num">QUEST 0{index + 1}</span>
                   <span className={`slot-status-pill status-${mission.statusType}`}>
                     S-RANK
@@ -119,13 +123,20 @@ export default function MissionSelector({ onSelectImage, activeStageIndex, setAc
         <div className="mission-showcase-box pixel-box">
           {/* Mission Box Header */}
           <div className="mission-box-header">
-            <div className="mission-header-info">
-              <div className="mission-code-row">
-                <RpgIcon id={questIcons[activeStageIndex] || 1} size={18} alt="" />
-                <span className="code-text">QUEST 0{activeStageIndex + 1}: {currentMission.title.toUpperCase()}</span>
-                <span className="code-date">({currentMission.date})</span>
+            <div className="mission-header-left">
+              {currentMission.logo && (
+                <div className="mission-logo-badge">
+                  <img src={currentMission.logo} alt={`${currentMission.title} Logo`} className="mission-logo-img" />
+                </div>
+              )}
+              <div className="mission-header-info">
+                <div className="mission-code-row">
+                  <RpgIcon id={questIcons[activeStageIndex] || 1} size={18} alt="" />
+                  <span className="code-text">QUEST 0{activeStageIndex + 1}: {currentMission.title.toUpperCase()}</span>
+                  <span className="code-date">({currentMission.date})</span>
+                </div>
+                <h3 className="mission-headline">{currentMission.tagline}</h3>
               </div>
-              <h3 className="mission-headline">{currentMission.tagline}</h3>
             </div>
 
             <div className="mission-header-actions">

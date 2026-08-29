@@ -1141,19 +1141,61 @@ body {
   margin-top: 4px;
 }
 
+.slot-logo-badge {
+  width: 20px;
+  height: 20px;
+  object-fit: contain;
+  border-radius: 3px;
+  background: #ffffff;
+  padding: 1px;
+  flex-shrink: 0;
+}
+
 .mission-showcase-box {
   padding: 28px;
 }
 
 .mission-box-header {
   display: flex;
-  align-items: flex-start;
+  align-items: center;
   justify-content: space-between;
   flex-wrap: wrap;
-  gap: 18px;
-  padding-bottom: 18px;
+  gap: 20px;
+  padding-bottom: 20px;
   border-bottom: 2px solid var(--border-subtle);
   margin-bottom: 24px;
+}
+
+.mission-header-left {
+  display: flex;
+  align-items: center;
+  gap: 18px;
+  flex: 1;
+  min-width: 280px;
+}
+
+.mission-logo-badge {
+  width: 58px;
+  height: 58px;
+  border-radius: 8px;
+  background: #ffffff;
+  border: 2px solid var(--border-medium);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.25);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 5px;
+  flex-shrink: 0;
+}
+
+.mission-logo-img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+}
+
+.mission-header-info {
+  flex: 1;
 }
 
 .mission-code-row {
