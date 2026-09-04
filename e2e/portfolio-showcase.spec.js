@@ -12,7 +12,7 @@ test.describe("Developer Portfolio Showcase & Interaction E2E Suite", () => {
     // Verify all 4 flagship stage tabs exist
     await expect(page.locator("#groundwork")).toBeVisible();
     await expect(page.locator("#recon-qa")).toBeVisible();
-    await expect(page.locator("#verispend")).toBeVisible();
+    await expect(page.locator("#tenvora")).toBeVisible();
     await expect(page.locator("#logiflow")).toBeVisible();
 
     // Verify navbar sticks to the top when scrolling
@@ -35,10 +35,10 @@ test.describe("Developer Portfolio Showcase & Interaction E2E Suite", () => {
     await expect(page.locator("#recon-qa")).toHaveClass(/is-selected/);
     await expect(page.getByText(/bounded worker pools/i).first()).toBeVisible();
 
-    // 3. Test keyboard shortcut '3' to switch to Stage 03: VeriSpend
+    // 3. Test keyboard shortcut '3' to switch to Stage 03: Tenvora
     await page.keyboard.press("3");
-    await expect(page.locator("#verispend")).toHaveClass(/is-selected/);
-    await expect(page.getByText(/tenant isolation/i).first()).toBeVisible();
+    await expect(page.locator("#tenvora")).toHaveClass(/is-selected/);
+    await expect(page.getByText(/Double-Entry Ledger|Settlement Clearing|Bank Reconciliation/i).first()).toBeVisible();
 
     // 4. Test keyboard shortcut '4' to switch to Stage 04: LogiFlow
     await page.keyboard.press("4");

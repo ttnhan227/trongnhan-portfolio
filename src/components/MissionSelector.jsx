@@ -7,7 +7,7 @@ import { playSfx } from '../utils/audio'
 const questIcons = [
   11, // Quest 01 Groundwork: Scroll / Oracle
   6,  // Quest 02 recon-qa: Twin Daggers / QA Scout
-  29, // Quest 03 VeriSpend: Gilded Shield / Multi-Tenant Aegis
+  29, // Quest 03 Tenvora: Gilded Shield / Ledger Integrity
   14, // Quest 04 LogiFlow: Treasure Chest / Caravan
 ]
 

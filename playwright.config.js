@@ -6,12 +6,12 @@ export default defineConfig({
   retries: 0,
   reporter: "list",
   webServer: {
-    command: "npm run dev -- --port 5173",
-    port: 5173,
-    reuseExistingServer: true,
+    command: "npm run dev -- --port 5188",
+    port: 5188,
+    reuseExistingServer: false,
   },
   use: {
-    baseURL: "http://localhost:5173",
+    baseURL: "http://localhost:5188",
     trace: "on-first-retry",
   },
   projects: [
