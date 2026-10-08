@@ -1,86 +1,47 @@
-import { expect, test } from "@playwright/test";
-
-test.describe("Developer Portfolio Showcase & Interaction E2E Suite", () => {
-  test.beforeEach(async ({ page }) => {
-    await page.setViewportSize({ width: 1440, height: 900 });
-  });
-
-  test("1. Hero branding, professional bio, and HUD navigation", async ({ page }) => {
-    await page.goto("/");
-    await expect(page.locator("header.site-header")).toContainText(/Tran Trong Nhan|SWE/i);
-
-    // Verify all 4 flagship stage tabs exist
-    await expect(page.locator("#groundwork")).toBeVisible();
-    await expect(page.locator("#recon-qa")).toBeVisible();
-    await expect(page.locator("#tenvora")).toBeVisible();
-    await expect(page.locator("#logiflow")).toBeVisible();
-
-    // Verify navbar sticks to the top when scrolling
-    await page.evaluate(() => window.scrollTo(0, 1000));
-    await page.waitForTimeout(200);
-    const headerBox = await page.locator("header.site-header").boundingBox();
-    expect(headerBox?.y).toBe(0);
-  });
-
-  test("2. Mission Stage Selector tabs, architecture pipeline, and keyboard shortcuts", async ({ page }) => {
-    await page.goto("/");
-
-    // 1. Stage 01: Groundwork is selected by default
-    await expect(page.locator("#groundwork")).toHaveClass(/is-selected/);
-    await expect(page.getByText(/Celery.*Redis/i).first()).toBeVisible();
-    await expect(page.getByText(/Citation verification engine/i).first()).toBeVisible();
-
-    // 2. Click Stage 02: recon-qa tab
-    await page.locator("#recon-qa").click();
-    await expect(page.locator("#recon-qa")).toHaveClass(/is-selected/);
-    await expect(page.getByText(/bounded worker pools/i).first()).toBeVisible();
-
-    // 3. Test keyboard shortcut '3' to switch to Stage 03: Tenvora
-    await page.keyboard.press("3");
-    await expect(page.locator("#tenvora")).toHaveClass(/is-selected/);
-    await expect(page.getByText(/Double-Entry Ledger|Settlement Clearing|Bank Reconciliation/i).first()).toBeVisible();
-
-    // 4. Test keyboard shortcut '4' to switch to Stage 04: LogiFlow
-    await page.keyboard.press("4");
-    await expect(page.locator("#logiflow")).toHaveClass(/is-selected/);
-    await expect(page.getByText(/Real-time GPS coordinate streaming/i).first()).toBeVisible();
-  });
-
-  test("3. Artifact screenshot lightbox modal and keyboard close", async ({ page }) => {
-    await page.goto("/");
-
-    // Click screenshot viewport directly
-    const clickableScreen = page.locator(".clickable-screen").first();
-    await expect(clickableScreen).toBeVisible();
-    await clickableScreen.click();
-
-    // Verify modal is open
-    const modal = page.locator("[role='dialog']");
-    await expect(modal).toBeVisible();
-
-    // Close via Escape key
-    await page.keyboard.press("Escape");
-    await expect(modal).not.toBeVisible();
-  });
-
-  test("4. Published Open Source tooling (recon-qa) and one-click pip install", async ({ page }) => {
-    await page.goto("/");
-
-    const toolingSection = page.locator("#tooling, #opensource").first();
-    await expect(toolingSection).toBeVisible();
-    await expect(page.getByText(/pip install recon-qa/i).first()).toBeVisible();
-    await expect(page.getByText(/OpenAPI Auto-Discovery|Bounded Concurrency/i).first()).toBeVisible();
-  });
-
-  test("5. Tactical loadout stack and side quest repository builds", async ({ page }) => {
-    await page.goto("/");
-
-    // Verify loadout categories
-    await expect(page.locator("#loadout")).toBeVisible();
-    await expect(page.getByText(/FastAPI|Spring Boot|ASP\.NET Core|React|PostgreSQL/i).first()).toBeVisible();
-
-    // Verify side quests
-    await expect(page.locator("#builds")).toBeVisible();
-    await expect(page.getByText(/ShineUp|CoffeeManagementSystem|yuibot/i).first()).toBeVisible();
-  });
+import {test,expect} from '@playwright/test';
+const key='nhan-workshop-village-v1';
+test('title loads without game assets and list exposes real links',async({page})=>{
+ const requests=[];page.on('request',r=>requests.push(r.url()));await page.goto('/');
+ await expect(page.getByRole('button',{name:'Continue',exact:true})).toBeDisabled();
+ expect(requests.filter(u=>/town\/tiles|dungeon\/tiles/.test(u))).toEqual([]);
+ await page.getByRole('link',{name:'Skip to portfolio'}).click();
+ await expect(page.getByRole('heading',{name:'Projects',exact:true})).toBeVisible();
+ await expect(page.getByRole('link',{name:'Download résumé'})).toHaveAttribute('href','/Tran_Trong_Nhan_CV.pdf');
+ expect(await page.locator('article').count()).toBe(9);
+});
+test('movement saves progress and journal opens all selected captures',async({page})=>{
+ const errors=[];page.on('pageerror',e=>errors.push(e.message));await page.goto('/');await page.getByRole('button',{name:'New game',exact:true}).click();
+ const canvas=page.locator('.game-canvas');await expect(canvas).toBeVisible();await expect(page.locator('progress')).toHaveCount(0);
+ await page.keyboard.down('w');await page.waitForTimeout(1000);await page.keyboard.up('w');await page.waitForTimeout(1200);
+ const save=await page.evaluate(k=>JSON.parse(localStorage.getItem(k)),key);expect(save.position.y).toBeLessThan(448);
+ await page.getByRole('button',{name:'Journal',exact:true}).click();
+ for(const title of ['Groundwork','Recon QA','Tenvora','LogiFlow']){
+  await page.getByRole('button',{name:new RegExp('UNEXPLORED '+title)}).click();
+  await expect(page.getByRole('dialog')).toBeVisible();await expect(page.getByRole('heading',{name:title,exact:true})).toBeVisible();
+  await expect.poll(()=>page.locator('.project-capture').evaluate(i=>i.complete&&i.naturalWidth>0)).toBe(true);
+  if(title==='Tenvora'){await page.getByRole('button',{name:'Mobile sales ledger'}).click();await expect(page.locator('.project-capture')).toHaveAttribute('src',/mobile.png/);}
+  await page.keyboard.press('Escape');await page.getByRole('button',{name:'Journal',exact:true}).click();
+ }
+ expect(errors).toEqual([]);
+});
+test('continue restores a room and direct interaction opens project',async({page})=>{
+ await page.addInitScript(({key})=>localStorage.setItem(key,JSON.stringify({version:1,scene:'groundwork',position:{x:120,y:83},visited:[]})),{key});
+ await page.goto('/');await page.getByRole('button',{name:'Continue',exact:true}).click();await expect(page.locator('progress')).toHaveCount(0);await page.waitForTimeout(300);await page.keyboard.press('e');
+ await expect(page.getByRole('heading',{name:'Groundwork',exact:true})).toBeVisible();await expect(page.locator('.project-capture')).toHaveCount(1);
+ await page.keyboard.press('Escape');await expect(page.getByRole('dialog')).toHaveCount(0);
+});
+test('phone controls and fallback have no horizontal overflow',async({page})=>{
+ await page.setViewportSize({width:390,height:844});await page.emulateMedia({reducedMotion:'reduce'});await page.goto('/');await page.getByRole('button',{name:'New game',exact:true}).click();await expect(page.getByRole('button',{name:'Move up'})).toBeVisible();await expect(page.locator('progress')).toHaveCount(0);
+ expect(await page.evaluate(()=>document.documentElement.scrollWidth)).toBeLessThanOrEqual(390);
+ await page.getByRole('link',{name:'Portfolio list',exact:true}).click();expect(await page.evaluate(()=>document.documentElement.scrollWidth)).toBeLessThanOrEqual(390);
+});
+test('fourth physical project interaction awards discovery achievement',async({page})=>{
+ await page.addInitScript(({key})=>localStorage.setItem(key,JSON.stringify({version:1,scene:'logiflow',position:{x:120,y:83},visited:['groundwork','recon-qa','tenvora']})),{key});
+ await page.goto('/');await page.getByRole('button',{name:'Continue',exact:true}).click();await expect(page.locator('progress')).toHaveCount(0);await page.waitForTimeout(300);await page.keyboard.press('e');await expect(page.getByText('Whole village explored')).toBeVisible();
+});
+test('solid furniture blocks movement and dialogs pause it',async({page})=>{
+ await page.addInitScript(({key})=>localStorage.setItem(key,JSON.stringify({version:1,scene:'groundwork',position:{x:120,y:83},visited:[]})),{key});
+ await page.goto('/');await page.getByRole('button',{name:'Continue',exact:true}).click();await expect(page.locator('progress')).toHaveCount(0);await page.keyboard.down('w');await page.waitForTimeout(2000);await page.keyboard.up('w');
+ const y=await page.evaluate(k=>JSON.parse(localStorage.getItem(k)).position.y,key);expect(y).toBeGreaterThanOrEqual(71);
+ await page.keyboard.press('e');await expect(page.getByRole('dialog')).toBeVisible();await page.keyboard.down('s');await page.waitForTimeout(1100);await page.keyboard.up('s');expect(await page.evaluate(k=>JSON.parse(localStorage.getItem(k)).position.y,key)).toBe(y);
 });
