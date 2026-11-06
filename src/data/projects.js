@@ -246,6 +246,12 @@ export const flagshipMissions = [
         image: '/styles/projects/logiflow/logiflow-reports.png',
         caption: 'Operational reports calculating on-time delivery percentages and fleet turnaround metrics.',
       },
+      {
+        id: 'lf-mobile',
+        title: 'Driver Partner Mobile App',
+        image: '/styles/projects/logiflow/logiflow-mobile.png',
+        caption: 'Flutter mobile application for active trip manifests, live route navigation, and e-POD signature uploads.',
+      },
     ],
     liveHref: 'https://logiflow-client.onrender.com/',
     repoHref: 'https://github.com/ttnhan227/logiflow',

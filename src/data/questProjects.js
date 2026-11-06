@@ -156,10 +156,16 @@ export const projects = [
     live: "https://logiflow-client.onrender.com/",
     images: [
       {
-        image: "/styles/projects/logiflow/fresh/map.png",
-        title: "Trip map and delivery workflow",
+        image: "/styles/projects/logiflow/logiflow-map.png",
+        title: "Logistics Corridor & GIS Network",
         caption:
-          "Fresh capture of the current dispatcher trip view, with the actual local API and sample shipment data.",
+          "Pan-Vietnam shipping corridor coverage, live vehicle status indicators, and STOMP GPS telemetry telemetry streams.",
+      },
+      {
+        image: "/styles/projects/logiflow/logiflow-mobile.png",
+        title: "Mobile Driver Operations",
+        caption:
+          "Flutter mobile interface for drivers to manage linehaul trips, inspect cargo manifests, and submit proofs of delivery.",
       },
     ],
   },
