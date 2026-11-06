@@ -56,6 +56,12 @@ export const flagshipMissions = [
         image: '/styles/projects/groundwork/groundwork-cleanup.png',
         caption: 'Dynamic reclaimable byte totaling, expandable file detail accordions, and Recycle Bin default protections.',
       },
+      {
+        id: 'gw-apps',
+        title: 'Application & Residual Trace Cleaner',
+        image: '/styles/projects/groundwork/groundwork-apps.png',
+        caption: 'Desktop & Store application inventory sorted by size with guided leftover trace scanning in AppData, ProgramData, and Registry.',
+      },
     ],
     liveHref: 'https://groundwork-client.onrender.com/',
     repoHref: 'https://github.com/ttnhan227/Groundwork',

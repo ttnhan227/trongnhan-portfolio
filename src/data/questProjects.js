@@ -28,7 +28,7 @@ export const projects = [
           "Native WinUI 3 desktop utility in action: storage space maps, Storage Sense cleanup, and hardware diagnostics.",
       },
       {
-        image: "/styles/projects/groundwork/fresh/workspace.png",
+        image: "/styles/projects/groundwork/groundwork-storage.png",
         title: "Storage Analyzer",
         caption:
           "Proportional folder breakdown bar, hierarchical tree explorer, and multi-threaded traversal metrics.",
@@ -44,6 +44,12 @@ export const projects = [
         title: "Storage Sense Cleanup",
         caption:
           "Dynamic reclaimable space calculation, expandable file accordions, and Recycle Bin safety protections.",
+      },
+      {
+        image: "/styles/projects/groundwork/groundwork-apps.png",
+        title: "Application Leftover Cleaner",
+        caption:
+          "Catalog desktop and Store apps sorted by size, run official uninstallers, and clean residual AppData traces.",
       },
     ],
     downloads: [
