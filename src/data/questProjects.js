@@ -105,7 +105,7 @@ export const projects = [
       "Use a configurable multi-provider AI assistant (Gemini, OpenAI, Mistral, Ollama, or custom OpenAI-compatible APIs) to search records and draft actions with manual confirmation.",
       "Enforce transactional consistency with EF Core and PostgreSQL locks to prevent race conditions during payment updates and balance calculations.",
     ],
-    note: "English and Vietnamese interfaces, VND currency, and a configurable multi-provider AI business assistant.",
+    note: "English and Vietnamese interfaces, USD and multi-currency ledger, and a configurable multi-provider AI business assistant.",
     repo: "https://github.com/ttnhan227/Tenvora",
     live: "https://tenvora-client.onrender.com/",
     images: [
