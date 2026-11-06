@@ -11,19 +11,39 @@ export const projects = [
     role: "Software engineer",
     stack: ["WinUI 3", "C#", ".NET 10", "Win32 API", "WMI"],
     features: [
-      "Scan local drives to visualize folder space usage, largest files, and leftover application data.",
-      "Inspect CPU, memory, BIOS, and disk health via WMI, with safe cleanup routed through the Windows Recycle Bin.",
-      "Connect a local or cloud AI provider (Ollama, LM Studio, Gemini, OpenAI, Anthropic, Mistral, Groq, DeepSeek) to answer system and storage questions.",
+      "Scan local drives to visualize folder space usage, 100% proportional space breakdown, and largest files.",
+      "Inspect live CPU, GPU, memory SPD modules, motherboard topology, and WHQL drivers via WMI.",
+      "Storage Sense recommendations and leftover application uninstaller with Recycle Bin safety guarantees.",
+      "Smart file organizer with non-destructive pre-execution preview plans and one-click safe restore.",
+      "Optional multi-provider AI assistant (Ollama, LM Studio, Gemini, OpenAI, Claude, Mistral) for disk and system questions.",
     ],
     note: "Local scanning and hardware diagnostics work 100% offline. The AI Agent is optional and supports both offline local models and cloud APIs.",
     repo: "https://github.com/ttnhan227/Groundwork",
     live: "https://groundwork-client.onrender.com/",
     images: [
       {
+        image: "/styles/projects/groundwork/groundwork-in-action.gif",
+        title: "Groundwork in Action",
+        caption:
+          "Native WinUI 3 desktop utility in action: storage space maps, Storage Sense cleanup, and hardware diagnostics.",
+      },
+      {
         image: "/styles/projects/groundwork/fresh/workspace.png",
         title: "Storage Analyzer",
         caption:
-          "Native WinUI 3 desktop app showing drive space breakdown, folder hierarchy, and scan metrics.",
+          "Proportional folder breakdown bar, hierarchical tree explorer, and multi-threaded traversal metrics.",
+      },
+      {
+        image: "/styles/projects/groundwork/groundwork-hardware.png",
+        title: "Hardware Diagnostics",
+        caption:
+          "Live CPU topology, dual GPU metrics, RAM SPD timings, motherboard firmware, and signed drivers.",
+      },
+      {
+        image: "/styles/projects/groundwork/groundwork-cleanup.png",
+        title: "Storage Sense Cleanup",
+        caption:
+          "Dynamic reclaimable space calculation, expandable file accordions, and Recycle Bin safety protections.",
       },
     ],
     downloads: [
