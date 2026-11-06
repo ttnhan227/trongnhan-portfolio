@@ -150,6 +150,12 @@ export const flagshipMissions = [
     ],
     screenshots: [
       {
+        id: 'tv-action',
+        title: 'Tenvora in Action',
+        image: '/styles/projects/tenvora/tenvora-in-action.gif',
+        caption: 'Interactive ledger walkthrough: real-time sales stream, customer receivables, receipt capture, and AI Copilot.',
+      },
+      {
         id: 'tv-landing',
         title: 'Operational Landing Portal',
         image: '/styles/projects/tenvora/tenvora-landing.png',

@@ -110,6 +110,11 @@ export const projects = [
     live: "https://tenvora-client.onrender.com/",
     images: [
       {
+        image: "/styles/projects/tenvora/tenvora-in-action.gif",
+        title: "Tenvora in Action",
+        caption: "Interactive ledger walkthrough: live sales, real-time debt tracking, and AI Copilot business assistant.",
+      },
+      {
         image: "/styles/projects/tenvora/fresh/sales.png",
         title: "Sales notebook",
         caption: "Record sales and payments in one business ledger.",
