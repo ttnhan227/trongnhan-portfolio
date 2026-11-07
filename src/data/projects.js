@@ -151,9 +151,15 @@ export const flagshipMissions = [
     screenshots: [
       {
         id: 'tv-action',
-        title: 'Tenvora in Action',
+        title: 'Tenvora Web in Action',
         image: '/styles/projects/tenvora/tenvora-in-action.gif',
         caption: 'Interactive ledger walkthrough: real-time sales stream, customer receivables, receipt capture, and AI Copilot.',
+      },
+      {
+        id: 'tv-mobile-action',
+        title: 'Tenvora Mobile in Action',
+        image: '/styles/projects/tenvora/tenvora-mobile-demo.gif',
+        caption: 'Native Android companion: 5-second counter sales, mobile receivables tracking, and grounded AI Copilot.',
       },
       {
         id: 'tv-landing',

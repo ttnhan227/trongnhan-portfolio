@@ -115,6 +115,12 @@ export const projects = [
         caption: "Interactive ledger walkthrough: live sales, real-time debt tracking, and AI Copilot business assistant.",
       },
       {
+        image: "/styles/projects/tenvora/tenvora-mobile-demo.gif",
+        title: "Mobile Companion in Action",
+        format: "phone",
+        caption: "Fast 5-second counter sales, mobile receivables, and grounded AI Copilot.",
+      },
+      {
         image: "/styles/projects/tenvora/fresh/sales.png",
         title: "Sales notebook",
         caption: "Record sales and payments in one business ledger.",
